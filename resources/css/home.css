@@ -3,19 +3,21 @@
 .home-header-box span:first-child{display:block;float:left;width:120px;height:50px;line-height: 50px;padding-left:10px;font-size:18px;}
 .home-header-box span:last-child{display:block;float:right;width:30px;height:50px;line-height: 50px;}
 .home-body-box{width:100%;height:100px;background:#FFF;padding:1%;}
-.account-money-box{float:left;width:250px;height:80px;text-align: center;}
-.account-money-box p{font-size:20px;font-weight: bold;margin:0 0 10px 0;}
+.account-money-box{float:left;width:20%;height:100%;text-align: center;}
+.account-money-box p{font-size:20px;font-weight: bold;margin:10px 0 10px 0;}
 .account-money-box span{color:#2d9af9;font-weight: bold;font-size: 20px;}
-.yestady-consume-box{float:left;width:250px;height:80px;border-left:1px dashed #ccc;border-right:1px dashed #ccc;text-align: center;}
-.yestady-consume-box p{font-size:20px;font-weight: bold;margin:0 0 10px 0;}
+.yestady-consume-box{float:left;width:20%;height:100%;border-left:1px dashed #ccc;border-right:1px dashed #ccc;text-align: center;}
+.yestady-consume-box p{font-size:20px;font-weight: bold;margin:10px 0 10px 0;}
 .yestady-consume-box span{color:#fa7800;font-weight: bold;font-size: 20px;}
-.tady-budget-box{float:left;width:250px;height:80px;text-align: center;}
-.tady-budget-box p{font-size:20px;font-weight: bold;margin:0 0 10px 0;}
+.tady-budget-box{float:left;width:20%;height:100%;text-align: center;}
+.tady-budget-box p{font-size:20px;font-weight: bold;margin:10px 0 10px 0;}
 .tady-budget-box span{color:#f22923;font-weight: bold;font-size: 20px;}
-.launch-num-box{float:left;width:250px;height:80px;text-align: center;border-left:1px dashed #ccc;}
-.launch-num-box p{font-size:20px;font-weight: bold;margin:0 0 10px 0;}
+.launch-num-box{float:left;width:20%;height:100%;text-align: center;border-left:1px dashed #ccc;}
+.launch-num-box p{font-size:20px;font-weight: bold;margin:10px 0 10px 0;}
 .launch-num-box span{color:#2d9af9;font-weight: bold;font-size: 20px;}
-
+.roi-box{float:left;width:20%;height:100%;text-align: center;border-left:1px dashed #ccc;}
+.roi-box p{font-size:20px;font-weight: bold;margin:10px 0 10px 0;}
+.roi-box span{color:#2d9af9;font-weight: bold;font-size: 20px;}
 .home-body-fn-box{width:100%;height:40px;margin:0 0 10px 0;}
 .day-but{display:block;float:right;width:50px;height:40px;line-height: 40px;text-align: center;border:1px solid #adadad;border-right:none;border-radius:3px 0 0 3px;color:#333;text-decoration: none;}
 .week-but{display:block;float:right;width:50px;height:40px;line-height: 40px;text-align: center;border:1px solid #adadad;color:#333;text-decoration: none;}

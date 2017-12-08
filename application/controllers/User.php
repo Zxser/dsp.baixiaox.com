@@ -36,8 +36,8 @@ class User extends ADLINKX_Controller {
 		if ($check_status && isset($check_status) && !empty($check_status)) {
 			unset($check_status['password']);
 			$this->session->set_userdata($check_status); //设置session
-			$this->session->set_userdata('source_oa_flag',1);
-			$this->session->set_userdata('permissions',0);
+			$this->session->set_userdata('source_oa_flag', 1);
+			$this->session->set_userdata('permissions', 0);
 			if ($remember) {
 //记住密码
 				foreach ($check_status AS $key => $value) {
@@ -45,9 +45,9 @@ class User extends ADLINKX_Controller {
 					set_cookie($key, $value, (time() + 3600 * 24 * 7), 'dsp.adease.com', '/', true, false);
 				}
 			}
-			$this->output_json(true,'');
+			$this->output_json(true, '');
 		} else {
-			$this->output_json(false,'');
+			$this->output_json(false, '');
 		}
 	}
 
@@ -112,9 +112,9 @@ class User extends ADLINKX_Controller {
 		// $loger_status = $this->loger->add($loger_data);
 
 		if ($user_status) {
-			$this->output_json(true,'');
+			$this->output_json(true, '');
 		} else {
-			$this->output_json(false,'');
+			$this->output_json(false, '');
 		}
 	}
 
@@ -130,9 +130,9 @@ class User extends ADLINKX_Controller {
 	public function check_password($data) {
 		$where = array('username' => $data['account']);
 		$passwd = $data['passwd'];
-		$query = $this->user->get($where, array('uid','username','password'));
+		$query = $this->user->get($where, array('uid', 'username', 'password'));
 		return is_array($query) && !empty($query) ? (
-			FN_md5_password_verify($passwd, $query['password'],$this->salt) ? $query : false
+			FN_md5_password_verify($passwd, $query['password'], $this->salt) ? $query : false
 		) : false;
 	}
 
@@ -142,27 +142,28 @@ class User extends ADLINKX_Controller {
 	}
 
 	public function sign_out() {
-		$sesion_items = array('uid', 'group', 'permissions', 'username', 'avatar','user_nick_oa','source_oa_flag');
+		$sesion_items = array('uid', 'group', 'permissions', 'username', 'avatar', 'user_nick_oa', 'source_oa_flag');
 		$this->session->unset_userdata($sesion_items);
 		redirect('http://dsp.adlinkx.com', 'auto ', 301);
 	}
 
-
-	public function source_oa_to_sigma(){
+	public function source_oa_to_sigma() {
 		$user_nick_oa = isset($_SESSION['user_nick_oa']) && !empty($_SESSION['user_nick_oa']) ? $_SESSION['user_nick_oa'] : (isset($_GET['user_nick']) && !empty($_GET['user_nick']) ? trim($_GET['user_nick']) : urldecode($this->uri->segment(3)));
 		$_SESSION['user_nick_oa'] = "";
 		$_SESSION['source_oa_flag'] = 2;
 		if ($user_nick_oa) {
-			$user_info = $this->user->get(array('username' => $user_nick_oa, 'channel_id' => 225));
-			if($user_info && !empty($user_info)){
-				$this->session->set_userdata('uid',$user_info['uid']);
-				$this->session->set_userdata('username',$user_info['username']);
-				$this->session->set_userdata('permissions',0);
-				$this->_redirect('http://dsp.adlinkx.com');
-			}else{
-				$this->_redirect('http://dsp.adlinkx.com/user/login');
+			$user_info = $this->user->get(array('username' => $user_nick_oa, 'channel_id' => 228));
+			// var_dump($user_info);
+			// exit;
+			if ($user_info && !empty($user_info)) {
+				$this->session->set_userdata('uid', $user_info['uid']);
+				$this->session->set_userdata('username', $user_info['username']);
+				$this->session->set_userdata('permissions', 0);
+				$this->_redirect('http://dsp.baixiaox.com');
+			} else {
+				$this->_redirect('http://dsp.baixiaox.com/user/login');
 			}
-			
+
 			// $this->load->model('User_model');
 			// if (($user_info = $this->User_model->check_password($user_nick_oa, "koolma@#$")) !== FALSE) {
 			// 	$this->init_user_info($user_info);

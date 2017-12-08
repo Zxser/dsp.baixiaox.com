@@ -50,13 +50,13 @@ class Ajax_api extends ADLINKX_Controller {
 			}
 			$where['own_id'] = $this->session->userdata('uid');
 			$store_lists = $this->store->lists($where, $num, $offset, $key, $stor, $fields, $count);
-			if(count($store_lists) > 0){
-				for($i=0;$i<count($store_lists);$i++){
-					$store_lists[$i]['store_money'] = sprintf("%.2f",$store_lists[$i]['store_money']);
-					$store_lists[$i]['account_money'] = sprintf("%.2f",$store_lists[$i]['account_money']);
-					$store_lists[$i]['charge_yesterday'] = sprintf("%.2f",$store_lists[$i]['charge_yesterday']);
-					$store_lists[$i]['charge_today'] = sprintf("%.2f",$store_lists[$i]['charge_today']);
-					$store_lists[$i]['agent_charge'] = sprintf("%.2f",$store_lists[$i]['agent_charge']);
+			if (count($store_lists) > 0) {
+				for ($i = 0; $i < count($store_lists); $i++) {
+					$store_lists[$i]['store_money'] = sprintf("%.2f", $store_lists[$i]['store_money']);
+					$store_lists[$i]['account_money'] = sprintf("%.2f", $store_lists[$i]['account_money']);
+					$store_lists[$i]['charge_yesterday'] = sprintf("%.2f", $store_lists[$i]['charge_yesterday']);
+					$store_lists[$i]['charge_today'] = sprintf("%.2f", $store_lists[$i]['charge_today']);
+					$store_lists[$i]['agent_charge'] = sprintf("%.2f", $store_lists[$i]['agent_charge']);
 				}
 			}
 			$this->output_json(true, $store_lists);
@@ -405,5 +405,14 @@ class Ajax_api extends ADLINKX_Controller {
 			$i++;
 		}
 		Export::excel($excel_title, $excel_arr, $excel_name);
+	}
+
+	public function roi() {
+		$this->load->model('store_model', 'store');
+		$store_id = $this->uri->segment(3) ? $this->uri->segment(3) : '';
+		$start_date = $this->uri->segment(4) ? $this->uri->segment(4) : date('Y-m-d', time()) . ' 00:00:00';
+		$end_date = $this->uri->segment(5) ? $this->uri->segment(5) : date('Y-m-d H:i:s', time());
+		$roi = $this->store->get_roi($store_id, $start_date, $end_date);
+		$this->output_json(true, array('roi' => $roi));
 	}
 }

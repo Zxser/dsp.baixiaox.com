@@ -122,8 +122,8 @@ class CreativeMange extends ADLINKX_Controller {
 		$ext_lists = array('jpg', 'jpeg', 'png', 'gif', 'swf', 'avi', 'wmv', '3gp');
 		$upload_dir = '/home/wwwroot/sigma.huihex.dsp/img/board/';
 		$logo_path = '/home/wwwroot/sigma.huihex.dsp/img/logo/';
-		// $upload_dir = '/home/wwwroot/dsp.adlinkx.com/resources/images/board';
-		// $upload_dir = 'C:/web/www/dsp.adlinkx.com/resources/images/board';
+		// $upload_dir = '/home/wwwroot/dsp.baixiaox.com/resources/images/board';
+		// $upload_dir = 'C:/web/www/dsp.baixiaox.com/resources/images/board';
 		$name = $_FILES['files']['name'];
 		$type = $_FILES['files']['type'];
 		$tmp_name = $_FILES['files']['tmp_name'];

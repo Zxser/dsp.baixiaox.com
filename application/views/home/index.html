@@ -1,381 +1,385 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
-    <{include file="common/header.html"}>
-    <link rel="stylesheet" type="text/css" href="/resources/css/home.css">
+ <{include file="common/header.html" }>
+  <link rel="stylesheet" type="text/css" href="/resources/css/home.css">
 </head>
+
 <body>
-    <!-- Preloader -->
-    <div id="preloader">
-        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
-    </div>
-    <section>
-        <{include file="common/leftpanel.html"}>
-        <!-- leftpanel -->
-        <div class="mainpanel">
-            <{include file="common/headerbar.html"}>
-            <!-- headerbar -->
-            <div class="pageheader">
-                <h2><i class="fa fa-paper-plane"></i>首页<span>数据统计</span></h2>
-                        <div class="breadcrumb-wrapper">
-                            <div class="select-brands-title">网站选择：</div>
-                            <div class="select-brands-but" data-is-click="false"><{if $store|@count neq 0}><span id="store-title-box" data-shop-id="<{$store[0].shop_id}>"><{$store[0].shop_title}></span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i><{else}><span id="store-title-box" data-shop-id="">全部</span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i><{/if}></div>
-                            <div class="brands-lists-block" style="display:none;">
-                            <{if $store|@count neq 0}>
-                                <div class="brands-lists" data-shop-id="">全部</div>
-                                <{foreach $store item=list key=i}>
-                                    <div class="brands-lists" data-shop-id="<{$list.shop_id}>"><{$list.shop_title}></div>
-                                <{/foreach}>
-                            <{else}>
-                                <div class="brands-lists" data-shop-id="">全部</div>
-                            <{/if}>
-                            </div>
-                        </div>
-            </div>
-            <div class="contentpanel">
-                <div class="home-block-box" data-is-hidden="false">
-                    <div class="home-header-box"><span>概况</span><span class="show-hidden-but" data-click="false" data-type="overview"><i class="fa fa-chevron-down"></i></span></div>
-                    <div class="home-body-box">
-                        <div class="account-money-box">
-                            <p>帐户余额</p>
-                            <span><{if $store|@count neq 0}><{$store[0].money|string_format:"%.2f"}><{else}>0<{/if}></span>
-                        </div>
-                        <div class="yestady-consume-box">
-                            <p>昨日消耗</p>
-                            <span><{$user.charge_today|string_format:"%.2f"}></span>
-                        </div>
-                        <div class="tady-budget-box">
-                            <p>今日预算</p>
-                            <span><{if $launch|@count neq 0}><{$launch[0].budget|string_format:"%.2f"}><{else}>0.00<{/if}></span>
-                        </div>
-                        <div class="launch-num-box">
-                            <p>投放中的计划个数</p>
-                            <span><{$start_launch_num|string_format:"%d"}>/<{$launch_num|string_format:"%d"}></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="home-block-box" data-is-hidden="false" style="height:550px;">
-                    <div class="home-header-box"><span><i class="fa fa-pie-chart"></i>&nbsp;数据趋势</span><span class="show-hidden-but" data-click="false" data-type=""><i class="fa fa-chevron-down"></i></span></div>
-                    <div class="home-body-box" style="height:500px;">
-                        <div class="home-body-fn-box">
-                        	<div class="home-body-fn-targets-box" data-is-click="false">
-                        		<i class="fa fa-line-chart" style="margin:0 10px 0 10px;"></i>
-                        		<a href="javascript:void(0);" id="targets-text" data-targets-values="ds_click"  data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>">展现量</a>
-                        		<i class="fa fa-caret-right" style="position:absolute;left:163px;top:13px;"></i>
-                        		<div class="home-body-targets-options-box" style="display:none;">
-                        			<div class="home-body-targets-options-list" data-option-values="ds_all" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>">全部</div>
-                        			<div class="home-body-targets-options-list" data-option-values="ds_pv" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>">展现量</div>
-                        			<div class="home-body-targets-options-list" data-option-values="ds_click" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>">点击数</div>
-                        			<div class="home-body-targets-options-list" data-option-values="ds_charge" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>">总消耗(元)</div>
-                        		</div>
-                        	</div>
-                            <div class="home-body-fn-time-box">
-                                <i class="fa fa-calendar time-icon"></i>
-                                <a href="javascript:void(0);" id="home-body-hook-time-but" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>"></a>
-                            </div>
-                            <div class="home-body-fn-buts-box">
-                                <a href="javascript:void(0);" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-fn="month" class="home-function-but month-but">按月</a>
-                                <a href="javascript:void(0);" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-fn="week" class="home-function-but week-but">按周</a>
-                                <a href="javascript:void(0);" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-fn="day" class="home-function-but day-but">按天</a>
-                            </div>
-                        </div>
-                        <div id="main" style="width: 100%;height:400px;"></div>
-                    </div>
-                </div>
-            </div>
-            <{include file="common/footerbar.html"}>
-            <!-- contentpanel -->
+ <!-- Preloader -->
+ <div id="preloader">
+  <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+ </div>
+ <section>
+  <{include file="common/leftpanel.html" }>
+   <!-- leftpanel -->
+   <div class="mainpanel">
+    <{include file="common/headerbar.html" }>
+     <!-- headerbar -->
+     <div class="pageheader">
+      <h2><i class="fa fa-paper-plane"></i>首页<span>数据统计</span></h2>
+      <div class="breadcrumb-wrapper">
+       <div class="select-brands-title">网站选择：</div>
+       <div class="select-brands-but" data-is-click="false">
+        <{if $store|@count neq 0}><span id="store-title-box" data-shop-id="<{$store[0].shop_id}>"><{$store[0].shop_title}></span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i>
+         <{else}><span id="store-title-box" data-shop-id="">全部</span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i>
+          <{/if}>
+       </div>
+       <div class="brands-lists-block" style="display:none;">
+        <{if $store|@count neq 0}>
+         <div class="brands-lists" data-shop-id="">全部</div>
+         <{foreach $store item=list key=i}>
+          <div class="brands-lists" data-shop-id="<{$list.shop_id}>">
+           <{$list.shop_title}>
+          </div>
+          <{/foreach}>
+           <{else}>
+            <div class="brands-lists" data-shop-id="">全部</div>
+            <{/if}>
+       </div>
+      </div>
+     </div>
+     <div class="contentpanel">
+      <div class="home-block-box" data-is-hidden="false">
+       <div class="home-header-box"><span>概况</span><span class="show-hidden-but" data-click="false" data-type="overview"><i class="fa fa-chevron-down"></i></span></div>
+       <div class="home-body-box">
+        <div class="account-money-box">
+         <p>帐户余额</p>
+         <span><{if $store|@count neq 0}><{$store[0].money|string_format:"%.2f"}><{else}>0<{/if}></span>
         </div>
-        <!-- mainpanel -->
-    </section>
-    <script src="/resources/js/libarays/jquery-1.11.1.min.js"></script>
-    <script src="/resources/js/libarays/jquery-migrate-1.2.1.min.js"></script>
-    <script src="/resources/js/libarays/jquery-ui-1.10.3.min.js"></script>
-    <script src="/resources/js/libarays/bootstrap.min.js"></script>
-    <script src="/resources/js/libarays/modernizr.min.js"></script>
-    <script src="/resources/js/libarays/jquery.sparkline.min.js"></script>
-    <script src="/resources/js/libarays/toggles.min.js"></script>
-  <!--   <script src="/resources/js/libarays/retina.min.js"></script> -->
-    <script src="/resources/js/libarays/jquery.cookies.js"></script>
-    <!-- <script src="/resources/js/libarays/flot/jquery.flot.min.js"></script>
+        <div class="yestady-consume-box">
+         <p>昨日消耗</p>
+         <span><{$user.charge_today|string_format:"%.2f"}></span>
+        </div>
+        <div class="tady-budget-box">
+         <p>今日预算</p>
+         <span><{if $launch|@count neq 0}><{$launch[0].budget|string_format:"%.2f"}><{else}>0.00<{/if}></span>
+        </div>
+        <div class="launch-num-box">
+         <p>投放中的计划个数</p>
+         <span><{$start_launch_num|string_format:"%d"}>/<{$launch_num|string_format:"%d"}></span>
+        </div>
+        <div class="roi-box">
+         <p>ROI</p>
+         <span id="roi-value-box">
+          <{if $store|@count neq 0}>1:<{$store[0].roi}><{else}>0:0<{/if}>
+          </span>
+        </div>
+       </div>
+      </div>
+      <div class="home-block-box" data-is-hidden="false" style="height:550px;">
+       <div class="home-header-box"><span><i class="fa fa-pie-chart"></i>&nbsp;数据趋势</span><span class="show-hidden-but" data-click="false" data-type=""><i class="fa fa-chevron-down"></i></span></div>
+       <div class="home-body-box" style="height:500px;">
+        <div class="home-body-fn-box">
+         <div class="home-body-fn-targets-box" data-is-click="false">
+          <i class="fa fa-line-chart" style="margin:0 10px 0 10px;"></i>
+          <a href="javascript:void(0);" id="targets-text" data-targets-values="ds_click" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>">展现量</a>
+          <i class="fa fa-caret-right" style="position:absolute;left:80%;top:13px;"></i>
+          <div class="home-body-targets-options-box" style="display:none;">
+           <div class="home-body-targets-options-list" data-option-values="ds_all" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>">全部</div>
+           <div class="home-body-targets-options-list" data-option-values="ds_pv" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>">展现量</div>
+           <div class="home-body-targets-options-list" data-option-values="ds_click" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>">点击数</div>
+           <div class="home-body-targets-options-list" data-option-values="ds_charge" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>">总消耗(元)</div>
+          </div>
+         </div>
+         <div class="home-body-fn-time-box">
+          <i class="fa fa-calendar time-icon"></i>
+          <a href="javascript:void(0);" id="home-body-hook-time-but" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>"></a>
+         </div>
+         <div class="home-body-fn-buts-box">
+          <a href="javascript:void(0);" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-fn="month" class="home-function-but month-but">按月</a>
+          <a href="javascript:void(0);" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-fn="week" class="home-function-but week-but">按周</a>
+          <a href="javascript:void(0);" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-fn="day" class="home-function-but day-but">按天</a>
+         </div>
+        </div>
+        <div id="main" style="width: 100%;height:400px;"></div>
+       </div>
+      </div>
+     </div>
+     <{include file="common/footerbar.html" }>
+      <!-- contentpanel -->
+   </div>
+   <!-- mainpanel -->
+ </section>
+ <script src="/resources/js/libarays/jquery-1.11.1.min.js"></script>
+ <script src="/resources/js/libarays/jquery-migrate-1.2.1.min.js"></script>
+ <script src="/resources/js/libarays/jquery-ui-1.10.3.min.js"></script>
+ <script src="/resources/js/libarays/bootstrap.min.js"></script>
+ <script src="/resources/js/libarays/modernizr.min.js"></script>
+ <script src="/resources/js/libarays/jquery.sparkline.min.js"></script>
+ <script src="/resources/js/libarays/toggles.min.js"></script>
+ <!--   <script src="/resources/js/libarays/retina.min.js"></script> -->
+ <script src="/resources/js/libarays/jquery.cookies.js"></script>
+ <!-- <script src="/resources/js/libarays/flot/jquery.flot.min.js"></script>
     <script src="/resources/js/libarays/flot/jquery.flot.resize.min.js"></script>
     <script src="/resources/js/libarays/flot/jquery.flot.spline.min.js"></script> -->
-    <script src="/resources/js/libarays/morris.min.js"></script>
-    <script src="/resources/js/libarays/raphael-2.1.0.min.js"></script>
-    <script src="/resources/js/libarays/custom.js"></script>
-    <!-- <script src="/resources/js/libarays/dashboard.js"></script> -->
-    <script type="text/javascript" src="/resources/js/libarays/laydate/laydate.js" charset="utf-8"></script>
-    <script>
-        jQuery(document).ready(function(){
+ <script src="/resources/js/libarays/morris.min.js"></script>
+ <script src="/resources/js/libarays/raphael-2.1.0.min.js"></script>
+ <script src="/resources/js/libarays/custom.js"></script>
+ <!-- <script src="/resources/js/libarays/dashboard.js"></script> -->
+ <script type="text/javascript" src="/resources/js/libarays/laydate/laydate.js" charset="utf-8"></script>
+ <script>
+ jQuery(document).ready(function() {
 
-            var myDate = new Date();
-            var newDate = myDate.getDate();
-            // myDate.setDate(myDate.getDate() - 7);
-            // var  weekDay= myDate.getDate();
-            // var week_time = myDate.getFullYear()+'-'+((myDate.getMonth()+1) > 9 ? (myDate.getMonth()+1) : '0'+(myDate.getMonth()+1))+'-'+(weekDay > 9 ? weekDay: '0'+weekDay);
-            var new_time= myDate.getFullYear()+'-'+((myDate.getMonth()+1) > 9 ? (myDate.getMonth()+1) : '0'+(myDate.getMonth()+1))+'-'+(newDate > 9 ? newDate: '0'+newDate);
-            var date_value = new_time+' ~ '+new_time;
-        
-        	get_dsp_sadt('today',{
-        		'start_date':new_time,
-                'end_date':new_time,
-                'shop_id':$('#store-title-box').attr('data-shop-id'),
-                'metric':'ds_pv',
-                'format':'chart'
-        	});
-            $(document).on('click','.show-hidden-but',function(){
-                if($(this).attr('data-click') == 'false'){
-                    $(this).attr('data-click',true);
-                    $(this).find('i').removeClass('fa-chevron-down').addClass('fa-chevron-up');
-                    $(this).parent().parent().css({'height':50,'overflow':'hidden'});
-                }else{
-                    $(this).attr('data-click',false);
-                    $(this).find('i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
-                    if($(this).attr('data-type') == 'overview'){
-                        $(this).parent().parent().css('height',150);
-                    }else{
-                        $(this).parent().parent().css('height',550);
-                    }
-                    
-                }
-            });
+  var myDate = new Date();
+  var newDate = myDate.getDate();
+  // myDate.setDate(myDate.getDate() - 7);
+  // var  weekDay= myDate.getDate();
+  // var week_time = myDate.getFullYear()+'-'+((myDate.getMonth()+1) > 9 ? (myDate.getMonth()+1) : '0'+(myDate.getMonth()+1))+'-'+(weekDay > 9 ? weekDay: '0'+weekDay);
+  var new_time = myDate.getFullYear() + '-' + ((myDate.getMonth() + 1) > 9 ? (myDate.getMonth() + 1) : '0' + (myDate.getMonth() + 1)) + '-' + (newDate > 9 ? newDate : '0' + newDate);
+  var date_value = new_time + ' ~ ' + new_time;
 
-            $(document).on('click','.select-brands-but',function(e){
-                e.stopPropagation();
-                if($(this).attr('data-is-click') == 'false'){
-                    $(this).find('i').removeClass('fa-caret-right').addClass('fa-caret-down');
-                    $(this).attr('data-is-click',true);
-                    $('.brands-lists-block').css('display','block');
-                }else{
-                    $(this).find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
-                    $(this).attr('data-is-click',false);
-                    $('.brands-lists-block').css('display','none');
-                }
-            });
+  get_dsp_sadt('today', {
+   'start_date': new_time,
+   'end_date': new_time,
+   'shop_id': $('#store-title-box').attr('data-shop-id'),
+   'metric': 'ds_pv',
+   'format': 'chart'
+  });
+  $(document).on('click', '.show-hidden-but', function() {
+   if ($(this).attr('data-click') == 'false') {
+    $(this).attr('data-click', true);
+    $(this).find('i').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+    $(this).parent().parent().css({ 'height': 50, 'overflow': 'hidden' });
+   } else {
+    $(this).attr('data-click', false);
+    $(this).find('i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+    if ($(this).attr('data-type') == 'overview') {
+     $(this).parent().parent().css('height', 150);
+    } else {
+     $(this).parent().parent().css('height', 550);
+    }
 
-            $(document).on('click','.brands-lists',function(e){
-            	var shop_id = $(this).attr('data-shop-id');
-                $('#store-title-box').html($(this).html()).attr('data-shop-id',shop_id);
-                $('#targets-text').attr('data-shop-id',shop_id);
-                $('.home-function-but').attr('data-shop-id',shop_id);
-                $('.home-body-hook-time-but').attr('data-shop-id',shop_id);
-                $('.home-body-targets-options-list').attr('data-shop-id',shop_id);
-                $('.select-brands-but').attr('data-is-click',false);
-                $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
-                $('.brands-lists-block').css('display','none');
-                // get_strategy_list($(this).attr('data-plan-id'),'');
-                get_store_info(shop_id);
-                get_user_info();
-                get_lauch_info(shop_id);
-                get_dsp_sadt('today',{
-                    	'start_date':0,
-                    	'end_date':0,
-                    	'shop_id':shop_id,
-                    	'metric':'ds_pv',
-                    	'format':'chart'
-                    });
-            });
+   }
+  });
 
-            $(document).on('click',function(){
-                $('.select-brands-but').attr('data-is-click',false);
-                $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
-                $('.brands-lists-block').css('display','none');
-                $(this).attr('data-is-click',false).find('i').eq(1).removeClass('fa-caret-down').addClass('fa-caret-right');
-                $('.home-body-targets-options-box').css('display','none');
-            });
+  $(document).on('click', '.select-brands-but', function(e) {
+   e.stopPropagation();
+   if ($(this).attr('data-is-click') == 'false') {
+    $(this).find('i').removeClass('fa-caret-right').addClass('fa-caret-down');
+    $(this).attr('data-is-click', true);
+    $('.brands-lists-block').css('display', 'block');
+   } else {
+    $(this).find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
+    $(this).attr('data-is-click', false);
+    $('.brands-lists-block').css('display', 'none');
+   }
+  });
 
-            $(document).on('click','.home-function-but',function(){
-                $('.home-function-but').removeClass('active').css('background','#fff');
-                $(this).addClass('active').css('background','#e6e6e6');
-                var fn = $(this).attr('data-fn');
-                var date = $('#home-body-hook-time-but').html();
-                get_dsp_sadt(fn,{
-                    'start_date':date.split(' ~ ')[0],
-                    'end_date':date.split(' ~ ')[1],
-                    'shop_id':$(this).attr('data-shop-id'),
-                    'metric':$('#targets-text').attr('data-targets-values'),
-                    'format':'chart'
-                });
-            });
+  $(document).on('click', '.brands-lists', function(e) {
+   var shop_id = $(this).attr('data-shop-id');
+   $('#store-title-box').html($(this).html()).attr('data-shop-id', shop_id);
+   $('#targets-text').attr('data-shop-id', shop_id);
+   $('.home-function-but').attr('data-shop-id', shop_id);
+   $('.home-body-hook-time-but').attr('data-shop-id', shop_id);
+   $('.home-body-targets-options-list').attr('data-shop-id', shop_id);
+   $('.select-brands-but').attr('data-is-click', false);
+   $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
+   $('.brands-lists-block').css('display', 'none');
+   // get_strategy_list($(this).attr('data-plan-id'),'');
+   get_store_info(shop_id);
+   get_user_info();
+   get_lauch_info(shop_id);
+   get_dsp_sadt('today', {
+    'start_date': 0,
+    'end_date': 0,
+    'shop_id': shop_id,
+    'metric': 'ds_pv',
+    'format': 'chart'
+   });
+  });
 
-            var insl = laydate.render({
-                elem: '#home-body-hook-time-but',
-                max:0,
-                range: '~',
-                value:date_value,
-                done:function(data){
-                    var start_date = data.split(' ~ ')[0];
-                    var end_date = data.split(' ~ ')[1];
-                    var shop_id = $('#home-body-hook-time-but').attr('data-shop-id');
-                    var metric = $('#targets-text').attr('data-targets-values');
-                    get_dsp_sadt('today',{
-                    	'start_date':start_date,
-                    	'end_date':end_date,
-                    	'shop_id':shop_id,
-                    	'metric':metric,
-                    	'format':'chart'
-                    });
-                }
-            });
+  $(document).on('click', function() {
+   $('.select-brands-but').attr('data-is-click', false);
+   $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
+   $('.brands-lists-block').css('display', 'none');
+   $(this).attr('data-is-click', false).find('i').eq(1).removeClass('fa-caret-down').addClass('fa-caret-right');
+   $('.home-body-targets-options-box').css('display', 'none');
+  });
 
-            $(document).on('click','.home-body-fn-targets-box',function(e){
-            	e.stopPropagation();
-            	if($(this).attr('data-is-click') == 'false'){
-            		$(this).attr('data-is-click',true).find('i').eq(1).removeClass('fa-caret-right').addClass('fa-caret-down');
-            		$('.home-body-targets-options-box').css('display','block');
-            	}else{
-            		$(this).attr('data-is-click',false).find('i').eq(1).removeClass('fa-caret-down').addClass('fa-caret-right');
-            		$('.home-body-targets-options-box').css('display','none');
-            	}
-            });
+  $(document).on('click', '.home-function-but', function() {
+   $('.home-function-but').removeClass('active').css('background', '#fff');
+   $(this).addClass('active').css('background', '#e6e6e6');
+   var fn = $(this).attr('data-fn');
+   var date = $('#home-body-hook-time-but').html();
+   get_dsp_sadt(fn, {
+    'start_date': date.split(' ~ ')[0],
+    'end_date': date.split(' ~ ')[1],
+    'shop_id': $(this).attr('data-shop-id'),
+    'metric': $('#targets-text').attr('data-targets-values'),
+    'format': 'chart'
+   });
+  });
 
-            $(document).on('mouseover','.home-body-targets-options-list',function(){
-            	$('.home-body-targets-options-list').css('background','#FFF');
-            	$(this).css({'background':'#c1c1c1','cursor':'pointer'});
-            });
+  var insl = laydate.render({
+   elem: '#home-body-hook-time-but',
+   max: 0,
+   range: '~',
+   value: date_value,
+   done: function(data) {
+    var start_date = data.split(' ~ ')[0];
+    var end_date = data.split(' ~ ')[1];
+    var shop_id = $('#home-body-hook-time-but').attr('data-shop-id');
+    var metric = $('#targets-text').attr('data-targets-values');
+    get_dsp_sadt('today', {
+     'start_date': start_date,
+     'end_date': end_date,
+     'shop_id': shop_id,
+     'metric': metric,
+     'format': 'chart'
+    });
 
-            $(document).on('click','.home-body-targets-options-list',function(){
-            	// var = 
-            	$('.home-body-targets-options-box').css('display','none');
-            	$('#targets-text').attr('data-targets-values',$(this).attr('data-option-values')).html($(this).html());
-            	var date = $('#home-body-hook-time-but').html();
-            	 get_dsp_sadt('today',{
-                    	'start_date':date.split(' ~ ')[0],
-                    	'end_date':date.split(' ~ ')[1],
-                    	'shop_id':$(this).attr('data-shop-id'),
-                    	'metric':$(this).attr('data-option-values'),
-                    	'format':'chart'
-                    });
-            });
+    set_roi(shop_id, start_date, end_date);
+   }
+  });
 
-            function get_store_info(shop_id){
-            	$.ajax({
-            		url:'/ajax_api/store/get/'+shop_id,
-            		type:'GET',
-            		success:function(res){
-            			if(res.code ==1 && res.msg == 'success'){
-            				$('.account-money-box').find('span').html(res.data.money);
-            			}else{
-            				ADLINKX.alert('获取网站信息失败');
-            			}
-            		},
-            		error:function(err){
-            			console.log(err);
-            		}
-            	});
-            }
+  $(document).on('click', '.home-body-fn-targets-box', function(e) {
+   e.stopPropagation();
+   if ($(this).attr('data-is-click') == 'false') {
+    $(this).attr('data-is-click', true).find('i').eq(1).removeClass('fa-caret-right').addClass('fa-caret-down');
+    $('.home-body-targets-options-box').css('display', 'block');
+   } else {
+    $(this).attr('data-is-click', false).find('i').eq(1).removeClass('fa-caret-down').addClass('fa-caret-right');
+    $('.home-body-targets-options-box').css('display', 'none');
+   }
+  });
 
-            function get_user_info(){
-            	$.ajax({
-            		url:'/ajax_api/user/get',
-            		type:'GET',
-            		success:function(res){
-            			if(res.code ==1 && res.msg == 'success'){
-            				$('.yestady-consume-box').find('span').html(res.data.charge_today);
-            			}else{
-            				ADLINKX.alert('获取广告主信息失败');
-            			}
-            		},
-            		error:function(err){
-            			console.log(err);
-            		}
-            	});
-            }
+  $(document).on('mouseover', '.home-body-targets-options-list', function() {
+   $('.home-body-targets-options-list').css('background', '#FFF');
+   $(this).css({ 'background': '#c1c1c1', 'cursor': 'pointer' });
+  });
 
-            function get_lauch_info(shop_id){
-            	$.ajax({
-            		url:'/ajax_api/launch/get_all/'+shop_id,
-            		type:'GET',
-            		success:function(res){
-            			if(res.code ==1 && res.msg == 'success'){
-            				$('.launch-num-box').find('span').html(res.data.start_launch+'/'+res.data.launch_num);
-            			}else{
-            				ADLINKX.alert('获取计划信息失败');
-            			}
-            		},
-            		error:function(err){
-            			console.log(err);
-            		}
-            	});
-            }
+  $(document).on('click', '.home-body-targets-options-list', function() {
+   // var = 
+   $('.home-body-targets-options-box').css('display', 'none');
+   $('#targets-text').attr('data-targets-values', $(this).attr('data-option-values')).html($(this).html());
+   var date = $('#home-body-hook-time-but').html();
+   get_dsp_sadt('today', {
+    'start_date': date.split(' ~ ')[0],
+    'end_date': date.split(' ~ ')[1],
+    'shop_id': $(this).attr('data-shop-id'),
+    'metric': $(this).attr('data-option-values'),
+    'format': 'chart'
+   });
+  });
 
-            function get_dsp_sadt(type,json){
-            	$.ajax({
-            		url:'/ajax_api/query_list/'+type+'/'+json.shop_id+'/'+json.start_date+'/'+json.end_date+'/'+json.format+'/'+json.metric,
-            		type:'GET',
-            		success:function(res){
-            			console.log(res);
-            			drag_line(res.data.legend,res.data.fields,res.data.data);
-            			//if(res.code ==1 && res.msg == 'success'){
-            			//	$('.launch-num-box').find('span').html(res.data.start_launch+'/'+res.data.launch_num);
-            			//}else{
-            			//	ADLINKX.alert('获取计划信息失败');
-            			//}
-            		},
-            		error:function(err){
-            			console.log(err);
-            		}
-            	});
-            }
+  function get_store_info(shop_id) {
+   $.ajax({
+    url: encodeURI('/ajax_api/store/get/' + shop_id),
+    type: 'GET',
+    success: function(res) {
+     if (res.code == 1 && res.msg == 'success') {
+      $('.account-money-box').find('span').html(res.data.money);
+     } else {
+      ADLINKX.alert('获取网站信息失败');
+     }
+    },
+    error: function(err) {
+     console.log(err);
+    }
+   });
+  }
 
-            // drag_line(['展现','点击','点击率','总消耗'],['周一','周二','周三','周四','周五','周六','周日'],[
-            //             {
-            //                 name:'展现',
-            //                 type:'line',
-            //                 stack: '总量',
-            //                 data:[3243, 0, 2342434, 0, 0, 0, 0]
-            //             },
-            //             {
-            //                 name:'点击',
-            //                 type:'line',
-            //                 stack: '总量',
-            //                 data:[0, 122030, 0, 0, 0, 0, 0]
-            //             },
-            //             {
-            //                 name:'总消耗',
-            //                 type:'line',
-            //                 stack: '总量',
-            //                 data:[0, 0, 0, 0, 0, 354356, 0]
-            //             }
-            //         ]);
-            function drag_line(legend,fields,data){
-                var myChart = echarts.init(document.getElementById('main'));
-                option = {
-                    title: {
-                        text: '折线图'
-                    },
-                    tooltip: {
-                        trigger: 'axis'
-                    },
-                    legend: {
-                        data:legend
-                    },
-                    grid: {
-                        left: '3%',
-                        right: '4%',
-                        bottom: '3%',
-                        containLabel: true
-                    },
-                    toolbox: {
-                        feature: {
-                            saveAsImage: {}
-                        }
-                    },
-                    xAxis: {
-                        type: 'category',
-                        boundaryGap: false,
-                        data: fields
-                    },
-                    yAxis: {
-                        type: 'value'
-                    },
-                    series: data
-                };
+  function get_user_info() {
+   $.ajax({
+    url: encodeURI('/ajax_api/user/get'),
+    type: 'GET',
+    success: function(res) {
+     if (res.code == 1 && res.msg == 'success') {
+      $('.yestady-consume-box').find('span').html(res.data.charge_today);
+     } else {
+      ADLINKX.alert('获取广告主信息失败');
+     }
+    },
+    error: function(err) {
+     console.error(err);
+    }
+   });
+  }
 
-                myChart.setOption(option);
-            }
-        });
-    </script>
+  function get_lauch_info(shop_id) {
+   $.ajax({
+    url: encodeURI('/ajax_api/launch/get_all/' + shop_id),
+    type: 'GET',
+    success: function(res) {
+     if (res.code == 1 && res.msg == 'success') {
+      $('.launch-num-box').find('span').html(res.data.start_launch + '/' + res.data.launch_num);
+     } else {
+      ADLINKX.alert('获取计划信息失败');
+     }
+    },
+    error: function(err) {
+     console.error(err);
+    }
+   });
+  }
+
+  function get_dsp_sadt(type, json) {
+   $.ajax({
+    url: encodeURI('/ajax_api/query_list/' + type + '/' + json.shop_id + '/' + json.start_date + '/' + json.end_date + '/' + json.format + '/' + json.metric),
+    type: 'GET',
+    success: function(res) {
+     drag_line(res.data.legend, res.data.fields, res.data.data);
+    },
+    error: function(err) {
+     console.log(err);
+    }
+   });
+  }
+
+  function drag_line(legend, fields, data) {
+   var myChart = echarts.init(document.getElementById('main'));
+   option = {
+    title: {
+     text: '折线图'
+    },
+    tooltip: {
+     trigger: 'axis'
+    },
+    legend: {
+     data: legend
+    },
+    grid: {
+     left: '3%',
+     right: '4%',
+     bottom: '3%',
+     containLabel: true
+    },
+    toolbox: {
+     feature: {
+      saveAsImage: {}
+     }
+    },
+    xAxis: {
+     type: 'category',
+     boundaryGap: false,
+     data: fields
+    },
+    yAxis: {
+     type: 'value'
+    },
+    series: data
+   };
+
+   myChart.setOption(option);
+  }
+
+
+  function set_roi(shop_id, start_date, end_date) {
+   $.ajax({
+    url: encodeURI('/ajax_api/roi/' + shop_id + '/' + start_date + '/' + end_date),
+    type: 'GET',
+    success: function(res) {
+     $('#roi-value-box').html('1:' + res.data.roi);
+    },
+    error: function(err) {
+     console.error(err);
+    }
+   });
+  }
+ });
+ </script>
 </body>
 
 </html>
