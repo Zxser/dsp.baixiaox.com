@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <{include file="common/header.html" }>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
+    <section>
+        <{include file="common/leftpanel.html" }>
+            <!-- leftpanel -->
+            <div class="mainpanel">
+                <{include file="common/headerbar.html" }>
+                    <!-- headerbar -->
+                    <div class="pageheader">
+                        <h2><i class="fa fa-paper-plane"></i>首页<span>活动管理</span> <span>创意管理</span></h2>
+                        <div class="breadcrumb-wrapper">
+                            <div class="select-brands-title">所属策略：</div>
+                            <div class="select-brands-but" data-is-click="false"><span id="store-title-box" data-unit-id="<{$unit_id}>">全部</span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i></div>
+                            <div class="brands-lists-block" style="display:none;">
+                                <div class="brands-lists" data-unit-id="">全部</div>
+                                <{foreach $units item=unit key=i}>
+                                    <div class="brands-lists" data-unit-id="<{$unit.unit_id}>"><{$unit.unit_name}></div>
+                                <{/foreach}>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contentpanel">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="page-title">创意管理</div>
+                                <div class="date-hook-box">
+                                    <i class="fa fa-calendar" style="float:left;margin:8px;"></i>
+                                    <a href="javascript:void(0);" id="hook-time-but" data-shop-id="" style="width:80%;"></a>
+                                </div>
+                                <div class="add-but-block"><a href="javascript:void(0);" class="add-buts but-24ac45" data-unit-id="<{$unit_id}>"><i class="fa fa-plus-circle ml10 mr4"></i>新增创意</a></div>
+                                <div class="space-box"></div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <div class="table-header-bloxk-box">
+                                        <a href="javascript:void(0);" class="select-all-buts" data-is-checked="false"><i class="fa fa-square-o fa-lg"></i>&nbsp;全选</a>
+                                        <a href="javascript:void(0);" class="delete-all-buts"><i class="fa fa-trash-o fa-lg"></i>&nbsp;批量删除</a>
+                                        <a href="javascript:void(0);" class="start-buts"><i class="fa fa-play-circle fa-lg"></i>&nbsp;开启</a>
+                                        <a href="javascript:void(0);" class="stop-buts"><i class="fa fa-pause-circle fa-lg"></i>&nbsp;暂停</a>
+                                        <span class="sreach-block-box">
+                                            <label>搜索：</label><input type="text/submit/hidden/button/etc" name="launch-search" value="" placeholder="输入要搜索的内容" id=creative-search-keyword><a href="javascript:void(0);" class="creative-search-buts">确定</a>
+                                        </span>
+                                    </div>
+                                    <table class="table table-striped" id="table2">
+                                        <thead>
+                                            <tr>                            
+                                                <th>序号</th>
+                                                <th>创意名称</th>
+                                                <th>推广组</th>
+                                                <th>推广计划</th>
+                                                <th>状态</th>
+                                                <th>创意格式</th>
+                                                <th>创意尺寸</th>
+                                               <th>展现量(次)</th>
+                                                <th>点击数(个)</th>
+                                                <th>点击率(%)</th>
+                                                <th>点击单价(元)</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <{if $creatives|@count neq 0}>
+                                                <{foreach $creatives item=lists key=i}>
+                                                    <tr>                 
+                                                    <td><a href="javascript:void(0);" class="select-buts" data-is-checked="false" data-id="<{$lists.id}>"><i class="fa fa-square-o"></i>&nbsp;<{$i+1}></a></td>
+                                                    <td><{$lists.borad_name}></td>
+                                                    <td><{$lists.unit_name}></td>
+                                                    <td><{$lists.plan_name}></td>
+                                                    <td><{if $lists.status eq 1}>开启<{else}>已暂停<{/if}></td>
+                                                    <td><{$lists.ext}></td>
+                                                    <td><{$lists.pic_size}></td>
+                                                    <td><{$lists.pv|string_format:"%d"}></td>
+                                                    <td><{$lists.click|string_format:"%d"}></td>
+                                                    <td><{$lists.ctr|string_format:"%.2f"}>%</td>
+                                                    <td><{$lists.click_cost|string_format:"%.2f"}></td>
+                                                    <td><a href="javascript:void(0);" data-id="<{$lists.id}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" data-plan-id="<{$lists.unit_id}>" class="delete-buts"  title="删除创意"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/creative/3_2/<{$lists.id}>" class="edit-buts"  title="编辑创意"><i class="fa fa-edit"></i></a><a href="javascript:void(0);" class="preview-buts" data-id="<{$lists.id}>" title="创意预览" data-pic-path="<{$lists.pic_path}>" data-borad-url="<{$lists.borad_url}>"><i class="fa fa-eye"></i></a></td>
+                                                </tr>
+                                                <{/foreach}>
+                                            <{else}>
+                                                <tr><td colspan="12" rowspan="" headers="" style="text-align: center;">暂无数据</td></tr>
+                                            <{/if}>
+                                            
+                                        </tbody>
+                                    </table>
+                                    <div id="pages-box" data-count="<{$count}>" data-current="<{$current}>" data-num="<{$num}>"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- contentpanel -->
+                    <{include file="common/footerbar.html" }>
+            </div>
+            <!-- mainpanel -->
+            
+    </section>
+    <script src="/resources/js/libarays/bootstrap.min.js"></script>
+    <script src="/resources/js/libarays/jquery.sparkline.min.js"></script>
+    <script src="/resources/js/libarays/toggles.min.js"></script>
+    <script src="/resources/js/libarays/jquery.cookies.js"></script>
+    <script src="/resources/js/libarays/custom.js"></script>
+    <script type="text/javascript" src="/resources/js/libarays/laydate/laydate.js" charset="utf-8"></script>
+    <script>
+    jQuery(document).ready(function() {
+        var myDate = new Date();
+        var newDate = myDate.getDate();
+        var start_date= myDate.getFullYear()+'-'+((myDate.getMonth()+1) > 9 ? (myDate.getMonth()+1) : '0'+(myDate.getMonth()+1))+'-'+(newDate > 9 ? newDate: '0'+newDate);
+        var end_date = start_date;
+        var date_value = start_date+' ~ '+end_date;
+        var insl = laydate.render({
+            elem: '#hook-time-but',
+            max:0,
+            range: '~',
+            value:date_value,
+            done:function(data){
+                var start_date = data.split(' ~ ')[0];
+                var end_date = data.split(' ~ ')[1];
+                var unit_id = $('#store-title-box').attr('data-unit-id');
+                get_creative_list(unit_id,'','','','','',start_date,end_date);
+            }
+        });
+
+        get_pages('pages-box','/creativeMange/lists/campaign/creative/0');
+
+        $(document).on('click','.select-all-buts',function(){
+            if($(this).attr('data-is-checked') == 'false'){
+                $(this).attr('data-is-checked',true);
+                $(this).find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
+                $('.select-buts').attr('data-is-checked',true);
+                $('.select-buts').find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
+            }else{
+                $(this).attr('data-is-checked',false);
+                $(this).find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+                $('.select-buts').attr('data-is-checked',false);
+                $('.select-buts').find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+            }
+        });
+
+        $(document).on('click','.select-buts',function(){
+            if($(this).attr('data-is-checked') == 'false'){
+                $(this).attr('data-is-checked',true);
+                $(this).find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
+            }else{
+                $(this).attr('data-is-checked',false);
+                $(this).find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+            }
+        });
+
+        $(document).on('click','.select-brands-but',function(e){
+            e.stopPropagation();
+            if($(this).attr('data-is-click') == 'false'){
+                $(this).attr('data-is-click',true);
+                $(this).find('i').removeClass('fa-caret-right').addClass('fa-caret-down');
+                $('.brands-lists-block').css('display','block');
+            }else{
+                $(this).attr('data-is-click',false);
+                $(this).find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
+                $('.brands-lists-block').css('display','none');
+            }
+            
+        });
+        $(document).on('click','.brands-lists',function(e){
+            var unit_id = $(this).attr('data-unit-id');
+            $('#store-title-box').html($(this).html()).attr('data-unit-id',unit_id);
+            $('.select-brands-but').attr('data-is-click',false);
+            $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
+            $('.brands-lists-block').css('display','none');
+            $('.add-buts').attr('data-unit-id',unit_id);
+            get_creative_list(unit_id,'','','','','',start_date,end_date);
+        });
+
+
+        $(document).on('click','.add-buts',function(){
+            if($(this).attr('data-unit-id') == ''){
+                ADLINKX.alert('请选择策略');
+            }else{
+                window.location.href='/step/edit/campaign/creative/3_1/'+$(this).attr('data-unit-id');
+            }
+        });
+
+        $(document).on('click','.delete-all-buts',function(){
+            var ids = [];
+            $('.select-buts').each(function(index, el) {
+                if($(this).attr('data-is-checked') == 'true'){
+                    ids.push($(this).attr('data-id'));
+                }
+            });
+            if(ids.length > 0){
+                delete_creative(ids.toString());
+            }else{
+                ADLINKX.alert('请选择要删除的创意');
+            }
+        });
+
+        $(document).on('click','.delete-buts',function(){
+            var ids = $(this).attr('data-id');
+            delete_creative(ids);
+        });
+
+        $(document).on('click','.start-buts',function(){
+            var ids = [];
+            $('.select-buts').each(function(index, el) {
+                if($(this).attr('data-is-checked') == 'true'){
+                    ids.push($(this).attr('data-id'));
+                }
+            });
+            if(ids.length > 0){
+                update_creative(ids.toString(),'start');
+            }else{
+                ADLINKX.alert('请选择要开启的创意');
+            }
+        });
+
+        $(document).on('click','.stop-buts',function(){
+            var ids = [];
+            $('.select-buts').each(function(index, el) {
+                if($(this).attr('data-is-checked') == 'true'){
+                    ids.push($(this).attr('data-id'));
+                }
+            });
+            if(ids.length > 0){
+                update_creative(ids.toString(),'stop');
+            }else{
+                ADLINKX.alert('请选择要停止的创意');
+            }
+        });
+
+        $(document).on('click','.creative-search-buts',function(){
+            var key_words = $('#creative-search-keyword').val();
+            if(key_words == ''){
+                ADLINKX.alert('请输入要搜索的关键字;');
+            }else{
+                get_creative_list('0',key_words,'','','','','','');
+            }
+        });
+
+        $(document).on('click','.preview-buts',function(){
+            var id = $(this).attr('data-id');
+            var html = '';
+            $.ajax({
+                url:'/creativeMange/get/'+id,
+                type:'GET',
+                success:function(res){
+                    if(res.code ==1 && res.msg == 'success'){
+                        html = '<div style="width:100%;height:auto;padding:1% 2%"><a href="'+res.data.borad_url+'" target="_blank"><img src="https://images.ztcadx.com/img/board/'+res.data.pic_path+'" style="display:block;width:300px;"></a></div>'+
+                        '<div  style="width:100%;height:auto;padding:1% 2%">创意ID：'+res.data.id+'</div>'+
+                        '<div  style="width:100%;height:auto;padding:1% 2%">创意地址：<a href="https://images.ztcadx.com/img/board/'+res.data.pic_path+'" target="_blank">https://images.ztcadx.com/img/board/'+res.data.pic_path+'</a></div>'+
+                        '<div  style="width:100%;height:auto;padding:1% 2%">创意格式：'+res.data.pic_path.split('.')[1]+'</div>'+
+                        '<div  style="width:100%;height:auto;padding:1% 2%">创意宽度：'+res.data.pic_width+'px</div>'+
+                        '<div  style="width:100%;height:auto;padding:1% 2%">创意高度：'+res.data.pic_height+'px</div>'+
+                        '<div  style="width:100%;height:auto;padding:1% 2%">创意连接：<a href="'+res.data.borad_url+'" target="_blank">'+res.data.borad_url+'</a></div>';
+                    }else{
+                        html = '<div style="width:100%;height:auto;padding:1% 2%;text-align:center;">获取创意数据失败</div>';
+                    }
+                    ADLINKX.popup_layer('创意预览',html,{
+                        width:640,
+                        height:480,
+                    });
+                },
+                error:function(err){
+                    console.log(err);
+                }
+            });
+        });
+
+        $(document).on('click',function(){
+            $('.select-brands-but').attr('data-is-click',false);
+            $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
+            $('.brands-lists-block').css('display','none');
+        });
+
+        function delete_creative(ids){
+            $.ajax({
+                url:'/creativeMange/delete',
+                type:'POST',
+                data:{'ids':ids},
+                success:function(res){
+                    if(res.code ==1 && res.msg == 'success'){
+                        ADLINKX.alert('删除成功',2,function(){
+                            window.location.reload();
+                        });
+                    }else{
+                        ADLINKX.alert('删除失败',2,function(){
+                            window.location.reload();
+                        });
+                    }
+                },
+                error:function(err){
+                    console.error(err);
+                }
+            });
+        }
+
+
+        function update_creative(ids,action){
+            $.ajax({
+                url:'/creativeMange/status',
+                type:'POST',
+                data:{'ids':ids,'action':action},
+                success:function(res){
+                    if(res.code ==1 && res.msg == 'success'){
+                        ADLINKX.alert('操作成功',2,function(){
+                            window.location.reload();
+                        });
+                    }else{
+                        ADLINKX.alert('操作失败',2,function(){
+                            window.location.reload();
+                        });
+                    }
+                },
+                error:function(err){
+                     console.error(err);
+                },
+            });
+        }
+
+
+        function get_creative_list(unit_id,key_words,offset,num,key,stor,start_date,end_date){
+            $.ajax({
+                url:encodeURI('/creativeMange/lists/campaign/creative/1/'+(unit_id ? unit_id : 0)+'/'+ (key_words ? key_words : 0)+'/'+(offset ? offset: 0)+'/'+(num?num:0)+'/'+(key?key:0)+'/'+(stor?stor:0)+'/'+(start_date?start_date:0)+'/'+(end_date?end_date:0)),
+                type:'GET',
+                success:function(res){
+                    if(res.code ==1 && res.msg == 'success'){
+                        var html = '';
+                        var list = res.data.list;
+                        var count = res.data.count;
+                        var current = res.data.current;
+                        if(list.length > 0){
+                            for(var i=0;i<list.length;i++){
+                                html += '<tr>'+
+                                    '<td><a class="select-buts" data-is-checked="false" data-id="'+list[i].id+'"><i class="fa fa-square-o"></i>&nbsp;'+(i+1)+'</a></td>'+
+                                    '<td>'+list[i].borad_name+'</td>'+
+                                    '<td>'+list[i].unit_name+'</td>'+
+                                    '<td>'+list[i].plan_name+'</td>'+
+                                    '<td>'+(list[i].status ==1 ? '开启': '已暂停')+'</td>'+
+                                    '<td>'+list[i].ext+'</td>'+
+                                    '<td>'+list[i].pic_size+'</td>'+
+                                    '<td>'+list[i].pv+'</td>'+
+                                    '<td>'+list[i].click+'</td>'+
+                                    '<td>'+list[i].ctr+'%</td>'+
+                                    '<td>'+list[i].click_cost+'</td>'+
+                                    '<td><a href="javascript:void(0);" data-id="'+list[i].id+'" class="delete-buts" title="删除创意"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/creative/3_2/'+list[i].id+'" class="edit-buts" title="编辑创意"><i class="fa fa-edit"></i></a><a href="javascript:void(0);" class="preview-buts" data-id="'+list[i].id+'" title="创意预览" data-pic-path="'+list[i].pic_path+'" data-borad-url="'+list[i].borad_url+'"><i class="fa fa-eye"></i></a></td>'+
+                                '</tr>';
+                            }
+                        }else{
+                            html = '<tr><td colspan="12" style="text-align:center;">暂无数据</td></tr>';
+                        }
+                        $('#table2').find('tbody').html(html);
+                        $('#pages-box').attr('data-count',count);
+                        $('#pages-box').attr('data-current',current);
+                        $('.select-all-buts').find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+                        get_pages('pages-box','/creativeMange/lists/campaign/creative/1/');
+                    }else{
+
+                    }
+                },
+                error:function(err){
+                    console.log(err);
+                }
+            });
+        }
+
+
+        function get_pages(el,url){
+            ADLINKX.pages({
+                id: el,
+                first: {
+                    text: '首页',
+                    callback: null,
+                    enable:true
+                },
+                last: {
+                    text: '尾页',
+                    callback: null,
+                    enable:true
+                },
+                next: {
+                    text: '下一页',
+                    callback: null,
+                    enable:true
+                },
+                previ: {
+                    text: '上一页',
+                    callback: null,
+                    enable:true
+                },
+                search: {
+                    text: '搜索',
+                    callback: null,
+                    enable:true
+                },
+                count: $('#'+el).attr('data-count'),
+                current: $('#'+el).attr('data-current'),
+                num:20,
+                color: '#0781ec',
+                is_ajax: true,
+                url:url,
+                callback:function(res){
+                    console.log(res);
+                }
+            });
+        }
+    });
+    </script>
+</body>
+
+</html>

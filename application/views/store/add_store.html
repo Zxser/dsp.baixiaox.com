@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <{include file="common/header.html"}>
+    <link rel="stylesheet" type="text/css" href="/resources/css/add_store.css" />
+    <script src="/resources/js/libarays/category.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
+    <section>
+        <{include file="common/leftpanel.html"}>
+        <!-- leftpanel -->
+        <div class="mainpanel">
+            <{include file="common/headerbar.html"}>
+            <!-- headerbar -->
+            <div class="pageheader">
+                <h2><i class="fa fa-tasks"></i>首页<span>网站管理</span> <span><{if $fun eq 'add'}>添加网站<{else}>编辑网站<{/if}></span></h2>
+                <div class="breadcrumb-wrapper">
+                    <span class="label">在这里</span>
+                    <ol class="breadcrumb">
+                        <li><a href="https://www.adlinkx.com">返回</a></li>
+                        <li class="active">首页</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="contentpanel">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="page-title" style="width:90%;"><{if $fun eq 'add'}>添加网站<{else}>编辑网站<{/if}></div>
+                                <div class="add-but-block"><a class="export-buts but-0781ec" href="/store/lists/store/lists"><i class="fa fa-reply ml10 mr4"></i>返回列表</a></div>
+                                <div class="space-box"></div>
+                    </div>
+                    <div class="panel-body">
+                        <input type="hidden" name="user-id" id="user-id" value="<{$smarty.session.uid}>">
+                        <div class="website-name-box"><label for="website-name">网站名称：<input type="text" id="website-name" name="website-name" value="<{$store.shop_title}>" /></label></div>
+                        <div class="website-url-box"><label for="website-url">网&nbsp;站&nbsp;接&nbsp;：<input type="text" id="website-url" name="website-url" value="<{$store.website}>" placeholder="http://"></label></div>
+                        <div class="website-plant-category-box">
+                            <div class="category-box">
+                                <div class="category-title">tanx行业类目：</div>
+                                <div class="category-select-box">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="tanx-parent-category">一级类目：<select name="tanx-parent-category" id="tanx-parent-category"></select></label><label for=tanx-child-category>&nbsp;&nbsp;&nbsp;&nbsp;二级类目：<select name="tanx-child-category" id="tanx-child-category"><option value="">请选择</option></select></label></div>
+                            </div>
+                            <div class="category-box">
+                                <div class="category-title">bes行业类目：</div>
+                                <div class="category-select-box">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="bea-parent-category">一级类目：<select name="bea-parent-category" id="bea-parent-category"></select></label><label for=bea-child-category>&nbsp;&nbsp;&nbsp;&nbsp;二级类目：<select name="bea-child-category" id="bea-child-category"><option value="">请选择</option></select></label></div>
+                            </div>
+                            <div class="category-box">
+                                <div class="category-title">万流客行业类目：</div>
+                                <div class="category-select-box">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="vm-parent-category">一级类目：<select name="vm-parent-category" id="vm-parent-category"></select></label><label for=vm-child-category>&nbsp;&nbsp;&nbsp;&nbsp;二级类目：<select name="vm-child-category" id="vm-child-category"><option value="">请选择</option></select></label></div>
+                            </div>
+                        </div>
+                        <div class="submit-store-box"><a href="javascript:void(0);" class="submit-buts">保存</a><a href="javascript:void(0);" class="cancel-buts">取消</a></div>
+                    </div>
+                </div>
+            </div>
+            <!-- contentpanel -->
+            <{include file="common/footerbar.html"}>
+        </div>
+    </section>
+   <!--  <script src="/resources/js/libarays/jquery-1.11.1.min.js"></script>
+    <script src="/resources/js/libarays/jquery-migrate-1.2.1.min.js"></script>
+    <script src="/resources/js/libarays/jquery-ui-1.10.3.min.js"></script> -->
+    <script src="/resources/js/libarays/bootstrap.min.js"></script>
+    <script src="/resources/js/libarays/jquery.sparkline.min.js"></script>
+    <script src="/resources/js/libarays/toggles.min.js"></script>
+    <script src="/resources/js/libarays/jquery.cookies.js"></script>
+    <script src="/resources/js/libarays/custom.js"></script>
+    <script>
+    $('#tanx-parent-category').html(output_opation_html('tanx',category,true)).on('change',function(){
+        $('#tanx-child-category').html(output_opation_html('tanx',category['tanx'][$(this).val()].child,false));
+    });
+    $('#tanx-child-category').html(output_opation_html('tanx',category['tanx']['706'].child,false));
+    $('#bea-parent-category').html(output_opation_html('bes',category,true)).on('change',function(){
+        $('#bea-child-category').html(output_opation_html('bes',category['bes'][$(this).val()].child,false));
+    });
+    $('#tanx-child-category').html(output_opation_html('bes',category['bes']['51'].child,false));
+    $('#vm-parent-category').html(output_opation_html('vm',category,true)).on('change',function(){
+        $('#vm-child-category').html(output_opation_html('vm',category['vm'][$(this).val()].child,false));
+    });
+    $('#vm-child-category').html(output_opation_html('vm',category['vm']['51'].child,false));
+    function output_opation_html(p,c,l){
+            var i='',tmp='';
+            if(l){
+                for(i in c[p]){
+                    tmp += '<option value="'+i+'">'+c[p][i].title+'</option>';
+                }
+            }else{
+                console.log(c);
+                for(i in c){
+                    tmp += '<option value="'+i+'">'+c[i]+'</option>';
+                }
+            }
+            return tmp;
+    }
+
+    $('.submit-buts').on('click',function(){
+        $.ajax({
+            url:'/store/add_to',
+            type:'POST',
+            data:{
+                'user_id':$('#user-id').val(),
+                'title':$('#website-name').val(),
+                'url':$('#website-url').val(),
+                'tanx_category':$('#tanx-child-category').val(),
+                'bes_category':$('#bea-child-category').val(),
+                'vm_category':$('#vm-child-category').val()
+            },
+            success:function(res){
+                // console.log(res);
+                if(res.code ==1 && res.msg == 'success'){
+                    window.location.href="/store/lists/store/lists";
+                }else{
+                    window.location.reload();
+                }
+            },
+            error:function(err){
+                console.log(err);
+            }
+        });
+    });
+
+    $('.cancel-buts').on('click',function(){
+        window.location.href="/store/lists/store/lists";
+    });
+    </script>
+</body>
+
+</html>
+

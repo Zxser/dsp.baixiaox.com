@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <{include file="common/header.html" }>
+        <link rel="stylesheet" type="text/css" href="/resources/css/account.css" />
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
+    <section>
+        <{include file="common/leftpanel.html" }>
+            <!-- leftpanel -->
+            <div class="mainpanel">
+                <{include file="common/headerbar.html" }>
+                    <!-- headerbar -->
+                    <div class="pageheader">
+                        <h2><i class="fa fa-user-circle"></i>首页<span>帐号管理</span> <span>帐户信息</span></h2>
+                        <div class="breadcrumb-wrapper">
+                            <span class="label">在这里</span>
+                            <ol class="breadcrumb">
+                                <li><a href="http://dsp.adlinkx.com">返回</a></li>
+                                <li class="active">首页</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="contentpanel">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">帐户信息管理</div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <div class="accoung-form-block-box">
+                                        <div class="account-form-list-box">
+                                            <label for="username">帐户名称：</label>
+                                            <input type="text" name="username" id="username" value="<{$account.username}>" placeholder="" disabled="disabled">
+                                        </div>
+                                        <div class="account-form-list-box">
+                                            <label for="wangwang">旺旺联系方式：</label>
+                                            <input type="text" name="wangwang" id="wangwang" value="<{$account.wangwang}>" placeholder="">
+                                        </div>
+                                        <div class="account-form-list-box">
+                                            <label for="money">帐户余额：</label>
+                                            <input type="text" name="money" id="money" value="<{$account.money}>" placeholder="" disabled="disabled">
+                                            <{if $smarty.session.permissions eq 1}>
+                                                <span><a href="javascript:void(0);" data-is-show="false" class="show-recharge-box-but">充值</a></span>
+                                            <{/if}>
+
+                                        </div>
+                                        <{if $smarty.session.permissions eq 1}>
+                                            <div class="recharge-block-box" style="display:none;">
+                                                <div class="recharge-input-box">
+                                                    <label for="recharge">输入充值金额：</label>
+                                                    <input type="text" id="recharge" name="recharge" value="" placeholder="输入充值金额" /><span class="recharge-tip-box">元</span></div>
+                                                <div class="recharge-buts-box"><a href="javascript:void(0);" class="recharge-buts">充值</a></div>
+                                            </div>
+                                        <{/if}>
+                                        <div class="account-form-list-box">
+                                            <label for="shop_name">店铺名称：</label>
+                                            <input type="text" name="shop_name" id="shop_name" value="<{$account.shop_name}>" placeholder="">
+                                        </div>
+                                        <div class="account-form-list-box">
+                                            <label for="shop_site">店铺连接：</label>
+                                            <input type="text" name="shop_site" id="shop_site" value="<{$account.shop_site}>" placeholder="">
+                                        </div>
+                                        <div class="account-form-list-box">
+                                            <label for="company_name">公司名称：</label>
+                                            <input type="text" name="company_name" id="company_name" value="<{$account.company_name}>" placeholder="">
+                                        </div>
+                                        <div class="account-form-list-box">
+                                            <label for="company_addr">公司地址：</label>
+                                            <input type="text" name="company_addr" id="company_addr" value="<{$account.company_addr}>" placeholder="">
+                                        </div>
+                                        <div class="account-form-list-box">
+                                            <label for="email">邮箱：</label>
+                                            <input type="text" name="email" id="email" value="<{$account.email}>" placeholder="">
+                                        </div>
+                                        <div class="account-form-list-box">
+                                            <label for="phone">手机：</label>
+                                            <input type="text" name="phone" id="phone" value="<{$account.phone}>" placeholder="">
+                                        </div>
+                                        <div class="account-form-list-box">
+                                            <label for="qq">QQ：</label>
+                                            <input type="text" name="qq" id="qq" value="<{$account.qq}>" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="account-form-buts-block-box">
+                                        <a href="javascript:void(0);" class="modify-account-info-buts" data-uid="<{if $account.uid neq ''}><{$account.uid}><{else}><{$smarty.session.uid}><{/if}>">修改</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- contentpanel -->
+                    <{include file="common/footerbar.html" }>
+            </div>
+            <!-- mainpanel -->
+    </section>
+    <!--  <script src="/resources/js/libarays/jquery-migrate-1.2.1.min.js"></script>
+    <script src="/resources/js/libarays/jquery-ui-1.10.3.min.js"></script> -->
+    <script src="/resources/js/libarays/bootstrap.min.js"></script>
+    <script src="/resources/js/libarays/modernizr.min.js"></script>
+    <script src="/resources/js/libarays/jquery.sparkline.min.js"></script>
+    <script src="/resources/js/libarays/toggles.min.js"></script>
+    <!-- <script src="/resources/js/libarays/retina.min.js"></script> -->
+    <script src="/resources/js/libarays/jquery.cookies.js"></script>
+    <script src="/resources/js/libarays/custom.js"></script>
+    <script>
+    jQuery(document).ready(function() {
+        $('.show-recharge-box-but').on('click', function() {
+            if ($(this).attr('data-is-show') == 'false') {
+                $('.recharge-block-box').css('display', 'block');
+                $(this).attr('data-is-show', true);
+            } else {
+                $('.recharge-block-box').css('display', 'none');
+                $(this).attr('data-is-show', false);
+            }
+        });
+        <{if $smarty.session.permissions eq 1}>
+            $('.recharge-buts').on('click', function() {
+                var money = $('#recharge').val();
+                $.ajax({
+                    url: '/account/recharge',
+                    type: 'POST',
+                    data: { 'money': money },
+                    success: function(res) {
+                        console.log(res)
+                        if (res.code == 1 && res.msg == 'success') {
+                            ADLINKX.alert('充值成功', 2, function() {
+                                window.location.reload();
+                            });
+                        } else {
+                            ADLINKX.alert('充值失败', 2, function() {
+                                window.location.reload();
+                            });
+                        }
+                    },
+                    error: function(err) {
+                        console.error(err);
+                    }
+                });
+            });
+        <{/if}>
+
+        $('.modify-account-info-buts').on('click', function() {
+            var uid = $(this).attr('data-uid') ? $(this).attr('data-uid') : "<{ $smarty.session.uid }>";
+            var wangwang = $('#wangwang').val();
+            var shop_name = $('#shop_name').val();
+            var shop_site = $('#shop_site').val();
+            var company_name = $('#company_name').val();
+            var company_addr = $('#company_addr').val();
+            var email = $('#email').val();
+            var phone = $('#phone').val();
+            var qq = $('#qq').val();
+            $.ajax({
+                url: '/account/update',
+                type: 'POST',
+                data: {
+                    'uid': uid,
+                    'shop_name': shop_name,
+                    'wangwang': wangwang,
+                    'shop_site': shop_site,
+                    'company_name': company_name,
+                    'company_addr': company_addr,
+                    'email': email,
+                    'phone': phone,
+                    'qq': qq
+                },
+                success: function(res) {
+                    console.log(res);
+                    if (res.code == 1 && res.msg == 'success') {
+                        ADLINKX.alert('修改成功', 2, function() {
+                            window.location.reload();
+                        });
+                    } else {
+                        ADLINKX.alert('修改失败', 2, function() {
+                            window.location.reload();
+                        });
+                    }
+
+                },
+                error: function(err) {
+                    console.error(err);
+                }
+            });
+        });
+    });
+    </script>
+</body>
+
+</html>

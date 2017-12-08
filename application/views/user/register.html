@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <{include file="common/header.html"}>
+    <link rel="stylesheet" type="text/css" href="/resources/css/login.css" />
+</head>
+<body>
+    <div class="page-bg-block h710">
+        <div class="log-block">
+            <div class="log-img-block"><img src="/resources/images/login-logo.png"></div>
+            <div class="log-text-block">百晓Dsp|注册</div>
+        </div>
+        <div class="form-list">
+            <label for="account"></label>
+            <input type="text" name="account" id="account" placeholder="输入用户名/邮箱/手机号" value="" />
+        </div>
+        <div class="account-tip">用户名不能为空;</div>
+        <div class="form-list">
+            <label for="passwd"></label>
+            <input type="password" name="passwd" id="passwd" placeholder="" value="" />
+        </div>
+        <div class="passwd-tip">密码不能为空;</div>
+        <div class="form-list">
+            <label for="confirm-passwd"></label>
+            <input type="password" name="confirm-passwd" id="confirm-passwd" placeholder="" value="" />
+        </div>
+        <div class="confirm-passwd-tip">密码不能为空;</div>
+        <div class="form-list">
+            <label for="email"></label>
+            <input type="text" name="email" id="email" placeholder="xxx@xxx.com" value="" />
+        </div>
+        <div class="email-tip">邮箱不能为空;</div>
+        <div class="form-list">
+            <label for="phone"></label>
+            <input type="text" name="phone" id="phone" placeholder="输入手机号" value="" />
+        </div>
+        <div class="phone-tip">手机号码不能为空;</div>
+        <div class="form-list"><div id="QapTcha" class="QapTcha"></div></div>
+        <div class="form-list"><a href='javascript:void(0);' class="simulation-submit-buts" data-submit-type="register">注册</a></div>
+        <div class="form-list"><a href='javascript:void(0);' class="simulation-ckeckbox-but" data-checked="true" data-type="agreement">我同意服务和隐私政策的条款</a><span class="link-block">已经注册过帐号<a href="/user/login" class="register-link">登录</a></span></div>
+    </div>
+</body>
+<script type="text/javascript" src="/resources/js/sign.js"></script>
+</html>

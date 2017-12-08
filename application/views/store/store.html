@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <{include file="common/header.html" }>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
+    <section>
+        <{include file="common/leftpanel.html" }>
+            <!-- leftpanel -->
+            <div class="mainpanel">
+                <{include file="common/headerbar.html" }>
+                    <!-- headerbar -->
+                    <div class="pageheader">
+                        <h2><i class="fa fa-tasks"></i>首页<span>店铺管理</span> <span>店铺列表</span></h2>
+                        <div class="breadcrumb-wrapper">
+                            <span class="label">在这里</span>
+                            <ol class="breadcrumb">
+                                <li><a href="http://dsp.adlinkx.com">返回</a></li>
+                                <li class="active">首页</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="contentpanel">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="page-title" style="width:60%;">网站列表</div>
+                                <div class="add-but-block" style="width:40%;">
+                                    <a class="export-buts but-0781ec" href="/store/add/store/lists"><i class="fa fa-plus-circle ml10 mr4"></i>添加网站</a>
+                                    <div class="search-box">
+                                        <input type="text" id="search-keywords-box" name="search-keywords-box" value="" placeholder="输入网站名称"><a href="javascript:void(0);" class="search-buts">搜索</a></div>
+                                </div>
+                                <div class="space-box"></div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <div class="table-header-bloxk-box">
+                                        <a href="javascript:void(0);" class="select-all-buts" data-is-checked="false"><i class="fa fa-square-o fa-lg"></i>&nbsp;全选</a>
+                                        <a href="javascript:void(0);" class="delete-all-buts"><i class="fa fa-trash-o fa-lg"></i>&nbsp;批量删除</a>
+                                    </div>
+                                    <table class="table table-striped" id="table2">
+                                        <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>投放广告主</th>
+                                                <th>网站名称</th>
+                                                <th>公司名称</th>
+                                                <th>联系人</th>
+                                                <th>联系电话</th>
+                                                <th>所属渠道</th>
+                                                <th>网站余额(元)</th>
+                                                <th>帐户余额(元)</th>
+                                                <th>昨日消耗(元)</th>
+                                                <th>今日消耗(元)</th>
+                                                <th>总消耗帐金额(元)</th>
+                                                <th>总消耗点击(次)</th>
+                                                <!-- <th>tanx行业类目</th>
+                                                <th>bes行业类目</th>
+                                                <th>vm行业类目</th> -->
+                                                <th>添加时间</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <{if $store_lists|@count neq 0}>
+                                                <{foreach $store_lists item=store key=i}>
+                                                    <tr>
+                                                        <td colspan="" rowspan="" headers="">
+                                                            <a href="javascript:void(0);" class="select-buts" data-is-checked="false" data-shop-id="<{$store.shop_id}>"><i class="fa fa-square-o"></i>&nbsp;<{$i}></a>
+                                                        </td>
+                                                        <td colspan="" rowspan="" headers="">
+                                                            <{$store.username}>
+                                                        </td>
+                                                        <td colspan="" rowspan="" headers="">
+                                                            <a href="<{$store.website}>" target="_blank">
+                                                                <{$store.shop_title}>
+                                                            </a>
+                                                        </td>
+                                                        <td colspan="" rowspan="" headers=""><{$store.company_name}></td>
+                                                        <td colspan="" rowspan="" headers="">
+                                                            <{$store.contact}>
+                                                        </td>
+                                                        <td colspan="" rowspan="" headers="">
+                                                            <{$store.phone}>
+                                                        </td>
+                                                        <td colspan="" rowspan="" headers="">
+                                                            <{if $store.channel_id eq '225' }>领效<{/if}>
+                                                        </td>
+                                                        <td colspan="" rowspan="" headers="">
+                                                            <{$store.store_money}>
+                                                        </td>
+                                                        <td colspan="" rowspan="" headers="">
+                                                            <{$store.account_money}>
+                                                        </td>
+                                                        <td colspan="" rowspan="" headers=""><{$store.charge_yesterday}></td>
+                                                        <td colspan="" rowspan="" headers=""><{$store.charge_today}></td>
+                                                        <td colspan="" rowspan="" headers=""><{$store.agent_charge}></td>
+                                                        <td colspan="" rowspan="" headers=""><{$store.click}></td>
+                                                        <td colspan="" rowspan="" headers="">
+                                                            <{$store.add_time}>
+                                                        </td>
+                                                        <td colspan="" rowspan="" headers=""><a href="javascript:void(0);" class="delete-buts" data-shop-id="<{$store.shop_id}>" title="删除"><i class="fa fa-trash-o"></i></a><a href="/store/edit/store/lists/<{$store.shop_id}>" class="edit-buts" data-shop-id="<{$store.shop_id}>" title="编辑"><i class="fa fa-edit"></i></a><a href="javascript:void(0);" class="allocation-quota-buts" data-shop-id="<{$store.shop_id}>" data-uid="<{$store.own_id}>" data-websit-name="<{$store.shop_title}>" style="margin:0 0 0 10px;"  title="分配配额"><i class="fa fa-gg-circle"></i></a></td>
+                                                    </tr>
+                                                <{/foreach}>
+                                            <{else}>
+                                                <tr><td colspan="16" rowspan="" headers="" style="text-align: center;">暂无数据</td></tr>
+                                            <{/if}>
+                                            
+                                        </tbody>
+                                    </table>
+                                    <div id="pages-box" data-count="<{$count}>" data-current="<{$current}>"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- contentpanel -->
+                    <{include file="common/footerbar.html" }>
+            </div>
+            <!-- mainpanel -->
+            <div class="allocation-quota-popup-block">
+                
+            </div>
+    </section>
+    <script src="/resources/js/libarays/bootstrap.min.js"></script>
+    <script src="/resources/js/libarays/jquery.sparkline.min.js"></script>
+    <script src="/resources/js/libarays/toggles.min.js"></script>
+    <script src="/resources/js/libarays/jquery.cookies.js"></script>
+    <script src="/resources/js/libarays/custom.js"></script>
+    <script>
+    jQuery(document).ready(function() {
+        'use strict';
+        get_pages('pages-box','/ajax_api/store/lists/0/0/');
+        $(document).on('click', '.delete-buts', function() {
+            $.ajax({
+                url: '/store/delete/' + $(this).attr('data-shop-id'),
+                type: 'GET',
+                success: function(res) {
+                    console.log(res);
+                    if (res.code == 1 && res.msg == 'success') {
+                        ADLINKX.alert('删除成功', 2, function() {
+                            window.location.reload();
+                        });
+                    } else {
+                        ADLINKX.alert('删除失败', 2, function() {
+                            window.location.reload();
+                        });
+                    }
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+        });
+
+        $(document).on('click', '.search-buts', function() {
+            var key_words = $('#search-keywords-box').val();
+            if(key_words == ''){
+                ADLINKX.alert('请输入要搜索的关键字;');
+            }
+            $.ajax({
+                url: encodeURI('/ajax_api/store/lists/0/0/' + key_words + '/1/20'),
+                type: 'GET',
+                success: function(res) {
+                    console.log(res);
+                    if (res.code == 1 && res.msg == 'success') {
+                        current = res.data.current;
+                        count = res.data.count;
+                        $('#table2').find('tbody').html(output_data_table(res.data.lists));
+                        ADLINKX.pages({
+                            id: 'pages-box',
+                            next: {
+                                text: 'next',
+                                callback: null
+                            },
+                            previ: {
+                                text: 'next',
+                                callback: null
+                            },
+                            count: count,
+                            current: current,
+                            color: '',
+                            search: {
+                                text: '',
+                                callback: null
+                            },
+                            is_ajax: false
+                        });
+                    }
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+        });
+
+        $(document).on('click','.select-all-buts',function(){
+            if($(this).attr('data-is-checked') == 'false'){
+                
+                $(this).attr('data-is-checked',true);
+                $(this).find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
+                $('.select-buts').attr('data-is-checked',true);
+                $('.select-buts').find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
+            }else{
+                $(this).attr('data-is-checked',false);
+                $(this).find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+                $('.select-buts').attr('data-is-checked',false);
+                $('.select-buts').find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+            }
+        });
+
+        $(document).on('click','.select-buts',function(){
+            if($(this).attr('data-is-checked') == 'false'){
+                $(this).attr('data-is-checked',true);
+                $(this).find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
+            }else{
+                $(this).attr('data-is-checked',false);
+                $(this).find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+            }
+        });
+
+        $(document).on('click','.delete-all-buts',function(){
+            var shop_ids = [];
+            $('.select-buts').each(function(index, el) {
+                if($(this).attr('data-is-checked') == 'true'){
+                    shop_ids.push($(this).attr('data-shop-id'));
+                }
+            });
+            $.ajax({
+                url:'/store/delete/',
+                type:'POST',
+                data:{'shop_ids':shop_ids.toString()},
+                success:function(res){
+                    console.log(res);
+                    if(res.code == 1 && res.msg == 'success'){
+                        ADLINKX.alert('删除成功', 2, function() {
+                            window.location.reload();
+                        });
+                    }else{
+                        ADLINKX.alert('删除失败', 2, function() {
+                            window.location.reload();
+                        });
+                    }
+                },
+                error:function(err){
+                    console.error(err);
+                }
+            });
+        });
+
+        function output_data_table(data) {
+            var tmp = '';
+            if (data.length > 0) {
+                for (var i = 0; i < data.length; i++) {
+                    tmp += '<tr>' +
+                        '<td colspan="" rowspan="" headers="">' + i + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['username'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['shop_title'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['company_name'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['contact']+ '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['phone'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + (data[i]['channel_id'] == 225 ? '领效' : '') + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['store_money'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['account_money'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['charge_yesterday'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['charge_today'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['agent_charge'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['click'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['add_time'] + '</td>' +
+                        '<td colspan="" rowspan="" headers=""><a href="javascript:void(0);" class="delete-buts" data-shop-id="' + data[i]['shop_id'] + '" title="删除"><i class="fa fa-trash-o"></i></a><a href="javascript:void(0);" class="edit-buts" data-shop-id="' + data[i]['shop_id'] + '" title="编辑"><i class="fa fa-edit"></i></a><a href="javascript:void(0);" calss="allocation-quota-buts" data-websit-name="'+ data[i]['shop_title']+'" data-shop-id="'+ data[i]['shop_id']+'" data-uid="'+ data[i]['own_id']+'" tite="分配配额"><i class="fa fa-gg-circle"></i></a></td>' +
+                        +'</tr>';
+                }
+            } else {
+                tmp += '<tr><td cellspacing="14" style="text-align:center;">暂无数据</td></tr>';
+            }
+            return tmp;
+        }
+
+        $('.allocation-quota-buts').on('click',function(){
+            var account_money = <{$user.money}>;
+            var shop_id = $(this).attr('data-shop-id');
+            var shop_title = $(this).attr('data-websit-name');
+            var uid = $(this).attr('data-uid');
+            var html = '<div class="account-money"style="width:100%;height:40px;"><span style="display:block;float:left;width:120px;height:40px;line-height:40px;text-align:right;">帐户余额：</span><span style="display:block;float:left;width:120px;height:38px;line-height:38px;margin:0 0 0 10px;"><{$user.money}></span></div>'+
+                    '<div class="account-money"style="width:100%;height:40px;"><span style="display:block;float:left;width:120px;height:40px;line-height:40px;text-align:right;">网站名称：</span><span style="display:block;float:left;width:140px;height:38px;line-height:38px;margin:0 0 0 10px;">'+shop_title+'</span></div>'+
+                    '<div class="allocation-quota-input-block" style="width:100%;height:40px;"><span style="display:block;float:left;width:120px;height:40px;line-height:40px;text-align:right;">输入要分配的额度：</span><input type="text" value="" name="allocation-quota-value" id="allocation-quota-value" style="display:block;float:left;width:100px;height:38px;line-height:38px;padding:0 0 0 10px;border:1px solid #c1c1c1;border-radius:2px;"/><span style="display:block;float:left;width:210px;height:40px;line-height:40px;">&nbsp;&nbsp;元&nbsp;&nbsp;&nbsp;&nbsp;分配的额度不能大于帐户余额</span></div>';
+            ADLINKX.popup_layer('分配配额',html,{
+                width:600,
+                height:280,
+                confirm:{
+                    title:'确定',
+                    callback:function(){
+                        var value = 0;
+                        if($('#allocation-quota-value').val() == ''){
+                            $('#allocation-quota-value').css('border-color','#F00');
+                            return false;
+                        }else if(!(/^([1-9][\d]{0,7}|0)(\.[\d]{1,2})?$/.test($('#allocation-quota-value').val()))){
+                            alert('输入正确的金额数');
+                            return false;
+                        }else if($('#allocation-quota-value').val() > account_money){
+                            alert('输入的金额不能大于帐户金额');
+                            return false;
+                        }else{
+                            value = $('#allocation-quota-value').val();
+                        }
+                        $.ajax({
+                            url:'/store/alloc_quota',
+                            type:'POST',
+                            data:{'shop_id':shop_id,'uid':uid,'value':value,'shop_title':shop_title},
+                            success:function(res){
+                                if(res.code == 1 && res.msg == 'success'){
+                                    ADLINKX.alert('配额分配成功',2,function(){
+                                        window.location.reload();
+                                    });
+                                }else{
+                                    ADLINKX.alert('配额分配失败',2,function(){
+                                        window.location.reload();
+                                    });
+                                }
+                            },
+                            error:function(err){
+                                console.log(err);
+                            }
+                        });
+                    }
+                },
+                cancel:{
+                    title:'取消',
+                }
+            });
+        });
+
+        function get_pages(el,url){
+            ADLINKX.pages({
+                id: 'pages-box',
+                first: {
+                    text: '首页',
+                    callback: null,
+                    enable: true
+                },
+                last: {
+                    text: '尾页',
+                    callback: null,
+                    enable: true
+                },
+                next: {
+                    text: '下一页',
+                    callback: null,
+                    enable: true
+                },
+                previ: {
+                    text: '上一页',
+                    callback: null,
+                    enable: true
+                },
+                search: {
+                    text: '搜索',
+                    callback: null,
+                    enable: true
+                },
+                count: $('#'+el).attr('data-count'),
+                current: $('#'+el).attr('data-current'),
+                num: 20,
+                color: '#0781ec',
+                is_ajax: true,
+                url: url,
+                callback: function(res) {
+                    console.log(res);
+                }
+            });
+        }
+    });
+    </script>
+</body>
+
+</html>

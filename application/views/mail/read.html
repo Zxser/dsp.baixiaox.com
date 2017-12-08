@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <{include file="common/header.html"}>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
+    <section>
+        <{include file="common/leftpanel.html"}>
+        <!-- leftpanel -->
+        <div class="mainpanel">
+            <{include file="common/headerbar.html"}>
+            <!-- headerbar -->
+            <div class="pageheader">
+                <h2><i class="fa fa-envelope"></i></i>首页<span>邮件</span><span>邮件信息</span></h2>
+                <div class="breadcrumb-wrapper">
+                    <span class="label">在这里</span>
+                    <ol class="breadcrumb">
+                        <li><a href="https://www.adlinkx.com">返回</a></li>
+                        <li class="active">首页</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="contentpanel panel-email">
+                <div class="row">
+                    <div class="col-sm-3 col-lg-2">
+                        <a href="/mail/compose" class="btn btn-danger btn-block btn-compose-email">写邮件</a>
+                        <ul class="nav nav-pills nav-stacked nav-email">
+                            <li class="active">
+                                <a href="email.html">
+                                    <span class="badge pull-right">2</span>
+                                    <i class="glyphicon glyphicon-inbox"></i>收件箱
+                                </a>
+                            </li>
+                            <li><a href="#"><i class="glyphicon glyphicon-star"></i>置顶邮件</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-send"></i>已发送的</a></li>
+                            <li>
+                                <a href="#">
+                                    <span class="badge pull-right">3</span>
+                                    <i class="glyphicon glyphicon-pencil"></i>草稿箱
+                                </a>
+                            </li>
+                            <li><a href="#"><i class="glyphicon glyphicon-trash"></i>回收站</a></li>
+                        </ul>
+                        <div class="mb30"></div>
+                        <h5 class="subtitle">文件夹</h5>
+                        <ul class="nav nav-pills nav-stacked nav-email mb20">
+                            <li>
+                                <a href="email.html">
+                                    <span class="badge pull-right">2</span>
+                                    <i class="glyphicon glyphicon-folder-open"></i>会议邮箱
+                                </a>
+                            </li>
+                            <li><a href="#"><i class="glyphicon glyphicon-folder-open"></i>通讯录</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-folder-open"></i>邀请函</a></li>
+                            <li>
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-folder-open"></i>促销邮件
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- col-sm-3 -->
+                    <div class="col-sm-9 col-lg-10">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="pull-right">
+                                    <div class="btn-group mr10">
+                                        <button class="btn btn-sm btn-white tooltips" type="button" data-toggle="tooltip" title="Archive"><i class="glyphicon glyphicon-hdd"></i></button>
+                                        <button class="btn btn-sm btn-white tooltips" type="button" data-toggle="tooltip" title="Report Spam"><i class="glyphicon glyphicon-exclamation-sign"></i></button>
+                                        <button class="btn btn-sm btn-white tooltips" type="button" data-toggle="tooltip" title="Delete"><i class="glyphicon glyphicon-trash"></i></button>
+                                    </div>
+                                    <div class="btn-group mr10">
+                                        <div class="btn-group nomargin">
+                                            <button data-toggle="dropdown" class="btn btn-sm btn-white dropdown-toggle tooltips" type="button" title="Move to Folder">
+                                                <i class="glyphicon glyphicon-folder-close mr5"></i>
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#"><i class="glyphicon glyphicon-folder-open mr5"></i> Conference</a></li>
+                                                <li><a href="#"><i class="glyphicon glyphicon-folder-open mr5"></i> Newsletter</a></li>
+                                                <li><a href="#"><i class="glyphicon glyphicon-folder-open mr5"></i> Invitations</a></li>
+                                                <li><a href="#"><i class="glyphicon glyphicon-folder-open mr5"></i> Promotions</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="btn-group nomargin">
+                                            <button data-toggle="dropdown" class="btn btn-sm btn-white dropdown-toggle tooltips" type="button" title="Label">
+                                                <i class="glyphicon glyphicon-tag mr5"></i>
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#"><i class="glyphicon glyphicon-tag mr5"></i> Web</a></li>
+                                                <li><a href="#"><i class="glyphicon glyphicon-tag mr5"></i> Photo</a></li>
+                                                <li><a href="#"><i class="glyphicon glyphicon-tag mr5"></i> Video</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group mr5">
+                                        <button class="btn btn-sm btn-white" type="button"><i class="fa fa-reply"></i></button>
+                                        <button data-toggle="dropdown" class="btn btn-sm btn-white dropdown-toggle" type="button">
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul role="menu" class="dropdown-menu pull-right">
+                                            <li><a href="#">Reply to All</a></li>
+                                            <li><a href="#">Forward</a></li>
+                                            <li><a href="#">Print</a></li>
+                                            <li><a href="#">Delete Message</a></li>
+                                            <li><a href="#">Report Spam</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- pull-right -->
+                                <div class="btn-group mr10">
+                                    <button class="btn btn-sm btn-white tooltips" type="button" data-toggle="tooltip" title="Read Previous Email"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                                    <button class="btn btn-sm btn-white tooltips" type="button" data-toggle="tooltip" title="Read Next Email"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                                </div>
+                                <div class="read-panel">
+                                    <div class="media">
+                                        <a href="#" class="pull-left">
+                                            <img alt="" src="/resources/images/photos/user2.png" class="media-object">
+                                        </a>
+                                        <div class="media-body">
+                                            <span class="media-meta pull-right">Yesterday at 1:30am</span>
+                                            <h4 class="text-primary">Nusja Nawancali</h4>
+                                            <small class="text-muted">From: hisemail@hisemail.com</small>
+                                        </div>
+                                    </div>
+                                    <!-- media -->
+                                    <h4 class="email-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit</h4>
+                                    <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritati.</p>
+                                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non</p>
+                                    <p><strong>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</strong></p>
+                                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritati.</p>
+                                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non</p>
+                                    <br />
+                                    <div class="media">
+                                        <a href="#" class="pull-left">
+                                            <img alt="" src="/resources/images/photos/user2.png" class="media-object">
+                                        </a>
+                                        <div class="media-body">
+                                            <textarea class="form-control" placeholder="Reply here..."></textarea>
+                                        </div>
+                                    </div>
+                                    <!-- media -->
+                                </div>
+                                <!-- read-panel -->
+                            </div>
+                            <!-- panel-body -->
+                        </div>
+                        <!-- panel -->
+                    </div>
+                    <!-- col-sm-9 -->
+                </div>
+                <!-- row -->
+            </div>
+            <{include file="common/footerbar.html"}>
+        </div>
+        <!-- mainpanel -->
+        <div class="rightpanel">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs nav-justified">
+                <li class="active"><a href="#rp-alluser" data-toggle="tab"><i class="fa fa-users"></i></a></li>
+                <li><a href="#rp-favorites" data-toggle="tab"><i class="fa fa-heart"></i></a></li>
+                <li><a href="#rp-history" data-toggle="tab"><i class="fa fa-clock-o"></i></a></li>
+                <li><a href="#rp-settings" data-toggle="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="rp-alluser">
+                    <h5 class="sidebartitle">Online Users</h5>
+                    <ul class="chatuserlist">
+                        <li class="online">
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="/resources/images/photos/userprofile.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Eileen Sideways</strong>
+                                    <small>Los Angeles, CA</small>
+                                </div>
+                            </div>
+                            <!-- media -->
+                        </li>
+                        <li class="online">
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="/resources/images/photos/user1.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <span class="pull-right badge badge-danger">2</span>
+                                    <strong>Zaham Sindilmaca</strong>
+                                    <small>San Francisco, CA</small>
+                                </div>
+                            </div>
+                            <!-- media -->
+                        </li>
+                        <li class="online">
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="/resources/images/photos/user2.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Nusja Nawancali</strong>
+                                    <small>Bangkok, Thailand</small>
+                                </div>
+                            </div>
+                            <!-- media -->
+                        </li>
+                        <li class="online">
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="/resources/images/photos/user3.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Renov Leongal</strong>
+                                    <small>Cebu City, Philippines</small>
+                                </div>
+                            </div>
+                            <!-- media -->
+                        </li>
+                        <li class="online">
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="/resources/images/photos/user4.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Weno Carasbong</strong>
+                                    <small>Tokyo, Japan</small>
+                                </div>
+                            </div>
+                            <!-- media -->
+                        </li>
+                    </ul>
+                    <div class="mb30"></div>
+                    <h5 class="sidebartitle">Offline Users</h5>
+                    <ul class="chatuserlist">
+                        <li>
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="/resources/images/photos/user5.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Eileen Sideways</strong>
+                                    <small>Los Angeles, CA</small>
+                                </div>
+                            </div>
+                            <!-- media -->
+                        </li>
+                        <li>
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="/resources/images/photos/user2.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Zaham Sindilmaca</strong>
+                                    <small>San Francisco, CA</small>
+                                </div>
+                            </div>
+                            <!-- media -->
+                        </li>
+                        <li>
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="/resources/images/photos/user3.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Nusja Nawancali</strong>
+                                    <small>Bangkok, Thailand</small>
+                                </div>
+                            </div>
+                            <!-- media -->
+                        </li>
+                        <li>
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="/resources/images/photos/user4.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Renov Leongal</strong>
+                                    <small>Cebu City, Philippines</small>
+                                </div>
+                            </div>
+                            <!-- media -->
+                        </li>
+                        <li>
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="/resources/images/photos/user5.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Weno Carasbong</strong>
+                                    <small>Tokyo, Japan</small>
+                                </div>
+                            </div>
+                            <!-- media -->
+                        </li>
+                        <li>
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="/resources/images/photos/user4.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Renov Leongal</strong>
+                                    <small>Cebu City, Philippines</small>
+                                </div>
+                            </div>
+                            <!-- media -->
+                        </li>
+                        <li>
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="/resources/images/photos/user5.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Weno Carasbong</strong>
+                                    <small>Tokyo, Japan</small>
+                                </div>
+                            </div>
+                            <!-- media -->
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-pane" id="rp-favorites">
+                    <h5 class="sidebartitle">Favorites</h5>
+                    <ul class="chatuserlist">
+                        <li class="online">
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="/resources/images/photos/user2.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Eileen Sideways</strong>
+                                    <small>Los Angeles, CA</small>
+                                </div>
+                            </div>
+                            <!-- media -->
+                        </li>
+                        <li>
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="/resources/images/photos/user1.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Zaham Sindilmaca</strong>
+                                    <small>San Francisco, CA</small>
+                                </div>
+                            </div>
+                            <!-- media -->
+                        </li>
+                        <li>
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="/resources/images/photos/user3.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Nusja Nawancali</strong>
+                                    <small>Bangkok, Thailand</small>
+                                </div>
+                            </div>
+                            <!-- media -->
+                        </li>
+                        <li class="online">
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="/resources/images/photos/user4.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Renov Leongal</strong>
+                                    <small>Cebu City, Philippines</small>
+                                </div>
+                            </div>
+                            <!-- media -->
+                        </li>
+                        <li class="online">
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="/resources/images/photos/user5.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Weno Carasbong</strong>
+                                    <small>Tokyo, Japan</small>
+                                </div>
+                            </div>
+                            <!-- media -->
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-pane" id="rp-history">
+                    <h5 class="sidebartitle">History</h5>
+                    <ul class="chatuserlist">
+                        <li class="online">
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="/resources/images/photos/user4.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Eileen Sideways</strong>
+                                    <small>Hi hello, ctc?... would you mind if I go to your...</small>
+                                </div>
+                            </div>
+                            <!-- media -->
+                        </li>
+                        <li>
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="/resources/images/photos/user2.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Zaham Sindilmaca</strong>
+                                    <small>This is to inform you that your product that we...</small>
+                                </div>
+                            </div>
+                            <!-- media -->
+                        </li>
+                        <li>
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="/resources/images/photos/user3.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Nusja Nawancali</strong>
+                                    <small>Are you willing to have a long term relat...</small>
+                                </div>
+                            </div>
+                            <!-- media -->
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-pane pane-settings" id="rp-settings">
+                    <h5 class="sidebartitle mb20">Settings</h5>
+                    <div class="form-group">
+                        <label class="col-xs-8 control-label">Show Offline Users</label>
+                        <div class="col-xs-4 control-label">
+                            <div class="toggle toggle-success"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-8 control-label">Enable History</label>
+                        <div class="col-xs-4 control-label">
+                            <div class="toggle toggle-success"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-8 control-label">Show Full Name</label>
+                        <div class="col-xs-4 control-label">
+                            <div class="toggle-chat1 toggle-success"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-8 control-label">Show Location</label>
+                        <div class="col-xs-4 control-label">
+                            <div class="toggle toggle-success"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- tab-pane -->
+            </div>
+            <!-- tab-content -->
+        </div>
+        <!-- rightpanel -->
+    </section>
+    <script src="/resources/js/libarays/jquery-1.11.1.min.js"></script>
+    <script src="/resources/js/libarays/jquery-migrate-1.2.1.min.js"></script>
+    <script src="/resources/js/libarays/bootstrap.min.js"></script>
+    <script src="/resources/js/libarays/modernizr.min.js"></script>
+    <script src="/resources/js/libarays/jquery.sparkline.min.js"></script>
+    <script src="/resources/js/libarays/toggles.min.js"></script>
+    <script src="/resources/js/libarays/retina.min.js"></script>
+    <script src="/resources/js/libarays/jquery.cookies.js"></script>
+    <script src="/resources/js/libarays/custom.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <{include file="common/header.html" }>
+    <script type="text/javascript">
+        var flg = null;
+    </script>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
+    <section>
+        <{include file="common/leftpanel.html" }>
+            <!-- leftpanel -->
+            <div class="mainpanel">
+                <{include file="common/headerbar.html" }>
+                    <!-- headerbar -->
+                    <div class="pageheader">
+                        <h2><i class="fa fa-paper-plane"></i>首页<span>活动管理</span> <span>投放管理</span></h2>
+                        <div class="breadcrumb-wrapper">
+                            <div class="select-brands-title">所属品牌：</div>
+                            <div class="select-brands-but" data-is-click="false"><{if $store_lists|@count neq 0}><span id="store-title-box" data-shop-id="<{$store_lists[0].shop_id}>"><{$store_lists[0].shop_title}></span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i><{else}><span id="store-title-box" data-shop-id="">全部</span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i><{/if}></div>
+                            <div class="brands-lists-block" style="display:none;">
+                                <{if $store_lists|@count neq 0}>
+                                    <div class="brands-lists" data-shop-id="">全部</div>
+                                    <{foreach $store_lists item=store key=i}>
+                                        <div class="brands-lists" data-shop-id="<{$store.shop_id}>"><{$store.shop_title}></div>
+                                    <{/foreach}>
+                                <{else}>
+                                    <div class="brands-lists" data-shop-id="">全部</div>
+                                <{/if}>
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contentpanel">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="page-title">投放管理</div>
+                                <div class="date-hook-box">
+                                    <i class="fa fa-calendar" style="float:left;margin:8px;"></i>
+                                    <a href="javascript:void(0);" id="hook-time-but" data-shop-id="<{if $store_lists|@count neq 0}><{$store_lists[0].shop_id}><{else}><{/if}>" style="width:80%;"></a>
+                                </div>
+                                <div class="add-but-block"><a class="add-buts but-24ac45" href="javascript:void(0);" data-shop-id="<{if $store_lists|@count neq 0}><{$store_lists[0].shop_id}><{else}><{/if}>"><i class="fa fa-plus-circle ml10 mr4"></i>新增投放</a></div>
+                                <div class="space-box"></div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <div class="table-header-bloxk-box">
+                                        <a href="javascript:void(0);" class="select-all-buts" data-is-checked="false"><i class="fa fa-square-o fa-lg"></i>&nbsp;全选</a>
+                                        <a href="javascript:void(0);" class="delete-all-buts"><i class="fa fa-trash-o fa-lg"></i>&nbsp;批量删除</a>
+                                        <a href="javascript:void(0);" class="start-buts"><i class="fa fa-play-circle fa-lg"></i>&nbsp;开启</a>
+                                        <a href="javascript:void(0);" class="stop-buts"><i class="fa fa-pause-circle fa-lg"></i>&nbsp;暂停</a>
+                                        <span class="sreach-block-box">
+                                            <label>搜索：</label><input type="text/submit/hidden/button/etc" name="launch-search" value="" placeholder="输入要搜索的内容" id=launch-search-keyword><a href="javascript:void(0);" class="launch-search-buts">确定</a>
+                                        </span>
+                                    </div>
+                                    <table class="table table-striped" id="table2">
+                                        <thead>                      
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>推广计划</th>
+                                                <th>状态</th>
+                                                <th>投放时间</th>
+                                                <th>每日预算</th>
+                                                <th>投放类型</th>
+                                                <th>展现量(次)</th>
+                                                <th>点击数(个)</th>
+                                                <th>点击率(%)</th>
+                                                <th>点击单价(元)</th>
+                                                <th>消耗(元)</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <{if $result|@count neq 0}>
+                                                <{foreach $result item=lists key=i}>
+                                                    <tr>
+                                                        <td><a href="javascript:void(0);" class="select-buts" data-is-checked="false" data-plan-id="<{$lists.plan_id}>"><i class="fa fa-square-o"></i>&nbsp;<{$i+1}></a></td>
+                                                        <td><a href="/strategyMange/lists/campaign/strategy/0/<{$lists.plan_id}>" class=""><{$lists.plan_name}></a></td>
+                                                        <td><{if $lists.status eq 1}>开启<{else}>已暂停<{/if}></td>
+                                                        <td><{$lists.startdate}>~<{$lists.enddate}></td>
+                                                        <td><{if $lists.budget eq 0}>不限<{else}><{$lists.budget}><{/if}></td>
+                                                        <td><{if $lists.device eq 1}>PC端<{elseif $lists.device eq 2}>无线端<{elseif $lists.device eq 3}>APP<{elseif $lists.device eq 4}>Native<{else}>不限设备<{/if}></td>
+                                                        <td><{$lists.pv|string_format:"%d"}></td>
+                                                        <td><{$lists.click|string_format:"%d"}></td>
+                                                        <td><{$lists.ctr|string_format:"%.2f"}>%</td>
+                                                        <td><{$lists.click_cost|string_format:"%.2f"}></td>
+                                                        <td><{$lists.charge|string_format:"%.2f"}></td>
+                                                        <td><a href="javascript:void(0);" data-uid="<{$lists.uid}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" class="delete-buts"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/launch/1_2/<{$lists.plan_id}>" class="edit-buts"><i class="fa fa-edit"></i></a></td>
+                                                    </tr>
+                                                <{/foreach}>
+                                            <{else}>
+                                                <tr><td colspan="12" rowspan="" headers="" style="text-align: center;">暂无数据</td></tr>
+                                            <{/if}>
+                                            
+                                        </tbody>
+                                    </table>
+                                    <div id="pages-box" data-count="<{$count}>" data-current="<{$current}>"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- contentpanel -->
+                    <{include file="common/footerbar.html" }>
+            </div>
+            <!-- mainpanel -->
+    </section>
+    <script src="/resources/js/libarays/bootstrap.min.js"></script>
+    <script src="/resources/js/libarays/jquery.sparkline.min.js"></script>
+    <script src="/resources/js/libarays/toggles.min.js"></script>
+    <script src="/resources/js/libarays/jquery.cookies.js"></script>
+    <script src="/resources/js/libarays/custom.js"></script>
+    <script type="text/javascript" src="/resources/js/libarays/laydate/laydate.js" charset="utf-8"></script>
+    <script>
+    jQuery(document).ready(function() {
+        var myDate = new Date();
+        var newDate = myDate.getDate();
+        var new_time= myDate.getFullYear()+'-'+((myDate.getMonth()+1) > 9 ? (myDate.getMonth()+1) : '0'+(myDate.getMonth()+1))+'-'+(newDate > 9 ? newDate: '0'+newDate);
+        var start_date = new_time;
+        var end_date = start_date;
+        var date_value = new_time+' ~ '+new_time;
+        var insl = laydate.render({
+            elem: '#hook-time-but',
+            max:0,
+            range: '~',
+            value:date_value,
+            done:function(data){
+                var start_date = data.split(' ~ ')[0];
+                var end_date = data.split(' ~ ')[1];
+                var shop_id = $('#hook-time-but').attr('data-shop-id');
+                get_launch_list(shop_id,0,0,0,0,0,start_date,end_date);
+            }
+        });
+
+        get_pages('pages-box','/launchMange/lists/campaign/launch/1/');
+
+        $(document).on('click','.select-all-buts',function(){
+            if($(this).attr('data-is-checked') == 'false'){
+                $(this).attr('data-is-checked',true);
+                $(this).find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
+                $('.select-buts').attr('data-is-checked',true);
+                $('.select-buts').find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
+            }else{
+                $(this).attr('data-is-checked',false);
+                $(this).find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+                $('.select-buts').attr('data-is-checked',false);
+                $('.select-buts').find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+            }
+        });
+
+        $(document).on('click','.select-buts',function(){
+            if($(this).attr('data-is-checked') == 'false'){
+                $(this).attr('data-is-checked',true);
+                $(this).find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
+            }else{
+                $(this).attr('data-is-checked',false);
+                $(this).find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+            }
+        });
+
+        $(document).on('click','.select-brands-but',function(e){
+            e.stopPropagation();
+            if($(this).attr('data-is-click') == 'false'){
+                $(this).attr('data-is-click',true);
+                $(this).find('i').removeClass('fa-caret-right').addClass('fa-caret-down');
+                $('.brands-lists-block').css('display','block');
+            }else{
+                $(this).attr('data-is-click',false);
+                $(this).find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
+                $('.brands-lists-block').css('display','none');
+            }
+            
+        });
+        $(document).on('click','.brands-lists',function(e){
+            $('#store-title-box').html($(this).html()).attr('data-shop-id',$(this).attr('data-shop-id'));
+            $('.select-brands-but').attr('data-is-click',false);
+            $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
+            $('.brands-lists-block').css('display','none');
+            $('.add-buts').attr('data-shop-id',$(this).attr('data-shop-id'));
+            get_launch_list($(this).attr('data-shop-id'),0,0,0,0,0,start_date,end_date);
+        });
+
+        $(document).on('click','.add-buts',function(){
+            var shop_id = $(this).attr('data-shop-id');
+            if(shop_id == ''){
+                ADLINKX.alert('请选择品牌');
+            }else{
+                window.location.href='/step/edit/campaign/launch/1_1/'+shop_id;
+            }
+        });
+
+        $(document).on('click',function(){
+            $('.select-brands-but').attr('data-is-click',false);
+            $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
+            $('.brands-lists-block').css('display','none');
+        });
+
+        $(document).on('click','.delete-all-buts',function(){
+            var ids = [];
+            $('.select-buts').each(function(index, el) {
+                if($(this).attr('data-is-checked') == 'true'){
+                    ids.push($(this).attr('data-plan-id'));
+                }
+            });
+            if(ids.length > 0){
+                delete_plan(ids.toString());
+            }else{
+                ADLINKX.alert('请选择要删除的投放');
+            }
+            
+        });
+
+        $(document).on('click','.delete-buts',function(){
+            var ids = $(this).attr('data-plan-id');
+            delete_plan(ids);
+        });
+
+        $(document).on('click','.start-buts',function(){
+            var shop_id = $('#store-title-box').attr('data-shop-id');
+            var ids = [];
+            $('.select-buts').each(function(index, el) {
+                if($(this).attr('data-is-checked') == 'true'){
+                    ids.push($(this).attr('data-plan-id'));
+                }
+            });
+            if(ids.length > 0){
+                $.ajax({
+                    url:'/store/check_money/'+shop_id,
+                    type:'GET',
+                    success:function(res){
+                        if(res.code == 1 && res.msg == 'success'){
+                            if(res.data.money > 50){
+                               update_launch(ids.toString(),'start');
+                            }else{
+                               ADLINKX.alert('网站余额少于50元，请先充值并分配配额');
+                            }
+                        }else{
+                            ADLINKX.alert('获取网站余额失败',2,function(){
+                                window.location.reload();
+                            });
+                        }
+                    },
+                    error:function(err){
+                        console.error(err);
+                    }
+                });
+                //console.log(check_store_money(shop_id));
+                
+            }else{
+                ADLINKX.alert('请选择要开启的投放');
+            }
+        });
+
+        $(document).on('click','.stop-buts',function(){
+            
+            var ids = [];
+            $('.select-buts').each(function(index, el) {
+                if($(this).attr('data-is-checked') == 'true'){
+                    ids.push($(this).attr('data-plan-id'));
+                }
+            });
+            if(ids.length > 0){
+                update_launch(ids.toString(),'stop');
+            }else{
+                ADLINKX.alert('请选择要停止的投放');
+            }
+        });
+
+        $(document).on('click','.launch-search-buts',function(){
+            var key_words = $('#launch-search-keyword').val();
+            var shop_id = $('#store-title-box').attr('data-shop-id');
+            if(key_words == ''){
+                ADLINKX.alert('请输入要搜索的关键字;');
+            }else{
+                get_launch_list(shop_id,key_words,0,0,0,0,start_date,end_date);
+            }
+        });
+
+        function get_launch_list(shop_id,key_words,offset,num,key,stor,start_date,end_date){
+            $.ajax({
+                url:encodeURI('/launchMange/lists/campaign/launch/1/'+shop_id+'/'+key_words+'/'+offset+'/'+num+'/'+key+'/'+stor+'/'+start_date+'/'+end_date),
+                type:'GET',
+                success:function(res){
+                    console.log(res);
+                    if(res.code ==1 && res.msg == 'success'){
+                        var html = '';
+                        var list = res.data.list;
+                        var count = res.data.count;
+                        var current = res.data.current;
+                        if(list.length > 0){
+                            for(var i=0;i<list.length;i++){
+                                html += '<tr>'+
+                                    '<td><a href="javascript:void(0);" class="select-buts" data-is-checked="false" data-plan-id="'+list[i].plan_id+'"><i class="fa fa-square-o"></i>&nbsp;'+(i+1)+'</a></td>'+
+                                    '<td><a href="/strategyMange/lists/campaign/strategy/0/'+list[i].plan_id+'" class="">'+list[i].plan_name+'</a></td>'+
+                                    '<td>'+(list[i].status == 1 ? '开启' : '已暂停')+'</td>'+
+                                    '<td>'+list[i].startdate+'~'+list[i].enddate+'</td>'+
+                                    '<td>'+list[i].budget+'</td>'+
+                                    '<td>'+get_device_type(list[i].device)+'</td>'+
+                                    '<td>'+list[i].pv+'</td>'+
+                                    '<td>'+list[i].click+'</td>'+
+                                    '<td>'+list[i].ctr+'%</td>'+
+                                    '<td>'+list[i].click_cost+'</td>'+
+                                    '<td>'+list[i].charge+'</td>'+
+                                    '<td><a href="javascript:void(0);" data-uid="'+list[i].uid+'" data-shop-id="'+list[i].shop_id+'" data-plan-id="'+list[i].plan_id+'" class="delete-buts"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/launch/1_2/'+list[i].plan_id+'" class="edit-buts"><i class="fa fa-edit"></i></a></td>'+
+                                '</tr>';
+                            }
+                        }else{
+                            html = '<tr><td colspan="12" style="text-align:center;">暂无数据</td></tr>';
+                        }
+                        $('#table2').find('tbody').html(html);
+                        $('#pages-box').attr('data-count',count);
+                        $('#pages-box').attr('data-current',current);
+                        $('.select-all-buts').find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+                        get_pages('pages-box','/launchMange/lists/campaign/launch/1/');
+                    }else{
+
+                    }
+                },
+                error:function(err){
+                    console.log(err);
+                }
+            });
+        }
+
+        function get_device_type(device){
+            switch(device){
+                case 1:
+                    return 'PC端';
+                break;
+                case 2:
+                    return '无线端';
+                break;
+                case 3:
+                    return 'APP';
+                break;
+                case 4:
+                    return 'Native';
+                break;
+                default:
+                    return '不限设备';
+                break;
+            }
+        }
+
+        function get_pages(el,url){
+            ADLINKX.pages({
+                id: el,
+                first: {
+                    text: '首页',
+                    callback: null,
+                    enable:true
+                },
+                last: {
+                    text: '尾页',
+                    callback: null,
+                    enable:true
+                },
+                next: {
+                    text: '下一页',
+                    callback: null,
+                    enable:true
+                },
+                previ: {
+                    text: '上一页',
+                    callback: null,
+                    enable:true
+                },
+                search: {
+                    text: '搜索',
+                    callback: null,
+                    enable:true
+                },
+                count: parseInt($('#'+el).attr('data-count')),
+                current: parseInt($('#'+el).attr('data-current')),
+                num:20,
+                color: '#0781ec',
+                is_ajax: true,
+                url:url,
+                callback:function(res){
+                    console.log(res);
+                }
+            });
+        }
+
+        function delete_plan(ids){
+            console.log(ids);
+            $.ajax({
+                url:'/launchMange/delete',
+                type:'POST',
+                data:{'ids':ids},
+                success:function(res){
+                    if(res.code ==1 && res.msg == 'success'){
+                        ADLINKX.alert('删除成功',2,function(){
+                            window.location.reload();
+                        });
+                    }else{
+                        ADLINKX.alert('删除失败',2,function(){
+                            window.location.reload();
+                        });
+                    }
+                },
+                error:function(err){
+                    console.error(err);
+                }
+            });
+        }
+
+        function update_launch(ids,action){
+            $.ajax({
+                url:'/launchMange/status',
+                type:'POST',
+                data:{'ids':ids,'action':action},
+                success:function(res){
+                    if(res.code ==1 && res.msg == 'success'){
+                        ADLINKX.alert('操作成功',2,function(){
+                            window.location.reload();
+                        });
+                    }else{
+                        ADLINKX.alert('操作失败',2,function(){
+                            window.location.reload();
+                        });
+                    }
+                },
+                error:function(err){
+                     console.error(err);
+                },
+            });
+        }
+
+    });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <{include file="common/header.html" }>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
+    <section>
+        <{include file="common/leftpanel.html" }>
+            <!-- leftpanel -->
+            <div class="mainpanel">
+                <{include file="common/headerbar.html" }>
+                    <!-- headerbar -->
+                    <div class="pageheader">
+                        <h2><i class="fa fa-file-text-o"></i>首页<span>运营管理</span> <span>操作日志</span></h2>
+                        <div class="breadcrumb-wrapper">
+                            <span class="label">在这里</span>
+                            <ol class="breadcrumb">
+                                <li><a href="http://dsp.adlinkx.com">返回</a></li>
+                                <li class="active">首页</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="contentpanel">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">用户操作日志</div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="table2">
+                                        <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>充值金额</th>
+                                                <th>充值方式</th>
+                                                <th>余额</th>
+                                                <th>操作时间</th>
+                                                <th>备注</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <{if $logers|@count neq 0}>
+                                                <{foreach $logers.data item=loger key=i}>
+                                                    <tr class="gradeA">
+                                                        <td>
+                                                            <{$i}>
+                                                        </td>
+                                                        <td>
+                                                            <{$loger.money}>
+                                                        </td>
+                                                        <td>
+                                                            <{if $loger.type eq 1}>手工充值
+                                                                <{elseif $loger.type eq 2}>日常投放。
+                                                                    <{else}>在线充值
+                                                                        <{/if}>
+                                                        </td>
+                                                        <td class="center">
+                                                            <{$loger.user_money}>
+                                                        </td>
+                                                        <td class="center">
+                                                            <{$loger.time}>
+                                                        </td>
+                                                        <td colspan="" rowspan="" headers="">
+                                                            <{$loger.remark}>
+                                                        </td>
+                                                        <td class="center">
+                                                            <a href="javascript:void(0);" class="delete-buts" data-uid="<{$loger.uid}>" data-id="<{$loger.id}>" title="删除"><i class="fa fa-trash-o"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                <{/foreach}>
+                                            <{else}>
+                                                <tr><td colspan="7" rowspan="" headers="" style="text-align: center;">暂无数据</td></tr>
+                                            <{/if}>
+                                            
+                                        </tbody>
+                                    </table>
+                                    <div id="pages-box" data-count="<{$logers.count}>" data-num="<{$logers.num}>" data-current="<{$logers.current}>"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- contentpanel -->
+                    <{include file="common/footerbar.html" }>
+            </div>
+            <!-- mainpanel -->
+    </section>
+    <script src="/resources/js/libarays/bootstrap.min.js"></script>
+    <script src="/resources/js/libarays/jquery.sparkline.min.js"></script>
+    <script src="/resources/js/libarays/toggles.min.js"></script>
+    <script src="/resources/js/libarays/jquery.cookies.js"></script>
+    <script src="/resources/js/libarays/custom.js"></script>
+    <script>
+    jQuery(document).ready(function() {
+        "use strict";
+        get_pages('pages-box','/operationLoger/index/loger/lists/1');
+
+        $('.delete-buts').on('click', function() {
+            var uid = $(this).attr('data-uid') ? $(this).attr('data-uid') : "<{ $smarty.session.uid }>" ;
+            var id = $(this).attr('data-id');
+            $.ajax({
+                url: '/operationLoger/delete/' + uid + '/' + id,
+                type: 'GET',
+                success: function(res) {
+                    console.log(res);
+                    if(res.code == 1 && res.msg == 'success'){
+                        ADLINKX.alert('删除成功',2,function(){
+                            window.location.reload();
+                        });
+                    }else{
+                        ADLINKX.alert('删除失败',2,function(){
+                            window.location.reload();
+                        });
+                    }
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+        });
+
+
+        function get_pages(el,url){
+            ADLINKX.pages({
+                id: 'pages-box',
+                first: {
+                    text: '首页',
+                    callback: null,
+                    enable: true
+                },
+                last: {
+                    text: '尾页',
+                    callback: null,
+                    enable: true
+                },
+                next: {
+                    text: '下一页',
+                    callback: null,
+                    enable: true
+                },
+                previ: {
+                    text: '上一页',
+                    callback: null,
+                    enable: true
+                },
+                search: {
+                    text: '搜索',
+                    callback: null,
+                    enable: true
+                },
+                count: $('#'+el).attr('data-count'),
+                current: $('#'+el).attr('data-current'),
+                num: 20,
+                color: '#0781ec',
+                is_ajax: true,
+                url: url,
+                callback: function(res) {
+                    console.log(res);
+                }
+            });
+        }
+    });
+    </script>
+</body>
+
+</html>
