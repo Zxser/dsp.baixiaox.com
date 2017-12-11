@@ -96,7 +96,7 @@ class User extends ADLINKX_Controller {
 			$data['phone'] = $phone;
 		}
 		$data['channel_id'] = 228;
-		$data['owner'] = '领效';
+		$data['owner'] = '百晓电商';
 		// var_dump($data);
 		$user_status = $this->user->add($data);
 		// $loger_data = array(
@@ -144,7 +144,7 @@ class User extends ADLINKX_Controller {
 	public function sign_out() {
 		$sesion_items = array('uid', 'group', 'permissions', 'username', 'avatar', 'user_nick_oa', 'source_oa_flag');
 		$this->session->unset_userdata($sesion_items);
-		redirect('http://dsp.adlinkx.com', 'auto ', 301);
+		redirect('http://dsp.baixiaox.com', 'auto ', 301);
 	}
 
 	public function source_oa_to_sigma() {
