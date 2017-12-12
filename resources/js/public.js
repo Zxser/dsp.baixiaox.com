@@ -548,6 +548,16 @@ Adlinkx.prototype.isNaN = function(x){
     return isNaN(x);
 }
 
+/**
+ * [getStyleValue 获取元素的实际(计算后的)样式值，可以获取行间样式、style、外部样式等值。]
+ * @param  {[type]} e   [要获取的样式的元素]
+ * @param  {[type]} key [要获取的样式的值]
+ * @return {[type]}     [返回实际的样式后]
+ */
+Adlinkx.prototype.getStyleValue = function(e,key){
+    return e.currentStyle ? e.currentStyle[key] : window.getComputedStyle(e,null)[key];
+}
+
 window.ADLINKX = new Adlinkx(jQuery);
 ADLINKX.information('className', 'description', 'author', 'version', 'date', 'email');
 ADLINKX.ckeckLogin();
