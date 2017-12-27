@@ -318,3 +318,5 @@ input {
 .report-query-buttons:hover{color:#0781ec;}
 .report-query-buttons:first-child{color:#FFF;background:#0781ec;border-color:#066eca;}
 .report-query-buttons:nth-child(1){color:#FFF;background:#0781ec;border-color:#066eca;}
+
+table th{font-family: 'Microsoft Yahei', Tahoma, Arial, STHeiti, 'LatoRegular', 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, sans-serif !important}
