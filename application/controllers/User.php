@@ -31,7 +31,9 @@ class User extends ADLINKX_Controller {
 		$result = array();
 		$input_data = $this->input->post();
 		$remember = $input_data['isChecked'];
+		$jump = $input_data['jump'];
 		unset($input_data['isChecked']);
+		unset($input_data['jump']);
 		$check_status = $this->check_password($input_data);
 		if ($check_status && isset($check_status) && !empty($check_status)) {
 			unset($check_status['password']);
@@ -45,9 +47,9 @@ class User extends ADLINKX_Controller {
 					set_cookie($key, $value, (time() + 3600 * 24 * 7), 'dsp.adease.com', '/', true, false);
 				}
 			}
-			$this->output_json(true, '');
+			$jump && isset($jump) ? $this->_redirect('http://dsp.baixiaox.com') : $this->output_json(true, '');
 		} else {
-			$this->output_json(false, '');
+			$jump && isset($jump) ? $this->_redirect('http://www.baixiaox.com/') : $this->output_json(false, '');
 		}
 	}
 
