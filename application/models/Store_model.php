@@ -119,10 +119,14 @@ class Store_model extends ADLINKX_Model {
 	public function update_money($data, $where) {
 		//开启事务
 		$this->db->trans_start();
+		// 获取用户的帐户余额
 		$user = $this->user->get(array('uid' => $where['uid']), array('money'));
-		$new_money = $user['money'] - $data['money'];
-		$up_user_money_sql = 'UPDATE `huihe_marketing_system`.`user` SET `money`=' . $new_money . ' WHERE `uid`=' . $where['uid'];
-		$up_store_money_sql = 'UPDATE `huihe_marketing_system`.`store` SET `money`=' . $data['money'] . ' WHERE `shop_id`=' . $where['shop_id'] . ' AND `own_id`=' . $where['uid'];
+		// 获取已分配的金额
+		$quota = $this->get(array('shop_id' => $where['shop_id']), 'money');
+		$shop_money = $quota + $data['money'];
+		$user_money = $user['money'] - $data['money'];
+		$up_user_money_sql = 'UPDATE `huihe_marketing_system`.`user` SET `money`=' . $user_money . ' WHERE `uid`=' . $where['uid'];
+		$up_store_money_sql = 'UPDATE `huihe_marketing_system`.`store` SET `money`=' . $shop_money . ' WHERE `shop_id`=' . $where['shop_id'] . ' AND `own_id`=' . $where['uid'];
 		$log_sql = 'INSERT INTO `huihe_marketing_system`.`dsp_log_charge` (uid,date,time,money,type,user_money,remark,detail) VALUES (' . $where['uid'] . ',"' . date('Y-m-d', time()) . '","' . date('Y-m-d H:i:s', time()) . '",' . $data['money'] . ',1,' . $new_money . ',"分配配额，网站名称：' . $where['shop_title'] . '","[]")';
 		//更新帐户余额
 		$this->db->query($up_user_money_sql);
