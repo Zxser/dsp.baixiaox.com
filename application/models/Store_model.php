@@ -123,6 +123,7 @@ class Store_model extends ADLINKX_Model {
 		$user = $this->user->get(array('uid' => $where['uid']), array('money'));
 		// 获取已分配的金额
 		$quota = $this->get(array('shop_id' => $where['shop_id']), 'money');
+		var_dump($quota);
 		$shop_money = $quota + $data['money'];
 		$user_money = $user['money'] - $data['money'];
 		$up_user_money_sql = 'UPDATE `huihe_marketing_system`.`user` SET `money`=' . $user_money . ' WHERE `uid`=' . $where['uid'];
