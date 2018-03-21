@@ -477,7 +477,7 @@ Adlinkx.prototype.popup_layer = function(title, text, json) {
             '.popup-header-block{width:' + parseInt(json.width - 10) + 'px;height:40px;line-height:40px;padding:0 0 0 20px;}' +
             '.popup-title{display:block;float:left;width:auto;height:40px;line-height:40px;}' +
             '.popup-close-but{display:block;float:right;width:40px;line-height40px;text-align:center;}' +
-            '.popup-body-block{width:' + parseInt(json.width - 20) + 'px;height:' + parseInt(json.height - 40) + 'px;padding:10px 0 10px 20px;overflow:auto;}' +
+            '.popup-body-block{width:' + parseInt(json.width - 20) + 'px;height:' + parseInt(json.height - 80) + 'px;padding:10px 0 10px 20px;overflow:auto;}' +
             '.poup-footer-block{width:100%;height:40px;}' +
             '.confirm-but-block{display:inline-block;width:118px;height:38px;line-height:38px;text-align:center;background:#0781ec;border:1px solid #066eca;color:#FFF;border-radius:2px;margin-left:280px;}' +
             '.cancel-but-block{display:inline-block;width:118px;height:38px;line-height:38px;text-align:center;border:1px solid #c1c1c1;background:#FFFl;color:#c1c1c1;border-radius:2px;margin-left:20px;}' +
