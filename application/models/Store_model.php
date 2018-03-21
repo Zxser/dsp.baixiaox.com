@@ -127,7 +127,7 @@ class Store_model extends ADLINKX_Model {
 		$user_money = $user['money'] - $data['money'];
 		$up_user_money_sql = 'UPDATE `huihe_marketing_system`.`user` SET `money`=' . $user_money . ' WHERE `uid`=' . $where['uid'];
 		$up_store_money_sql = 'UPDATE `huihe_marketing_system`.`store` SET `money`=' . $shop_money . ' WHERE `shop_id`=' . $where['shop_id'] . ' AND `own_id`=' . $where['uid'];
-		$log_sql = 'INSERT INTO `huihe_marketing_system`.`dsp_log_charge` (uid,date,time,money,type,user_money,remark,detail) VALUES (' . $where['uid'] . ',"' . date('Y-m-d', time()) . '","' . date('Y-m-d H:i:s', time()) . '",' . $data['money'] . ',1,' . $new_money . ',"分配配额，网站名称：' . $where['shop_title'] . '","[]")';
+		$log_sql = 'INSERT INTO `huihe_marketing_system`.`dsp_log_charge` (uid,date,time,money,type,user_money,remark,detail) VALUES (' . $where['uid'] . ',"' . date('Y-m-d', time()) . '","' . date('Y-m-d H:i:s', time()) . '",' . $data['money'] . ',1,' . $user_money . ',"分配配额，网站名称：' . $where['shop_title'] . '","[]")';
 		//更新帐户余额
 		$this->db->query($up_user_money_sql);
 		//更新配额
