@@ -40,7 +40,7 @@ class Home extends ADLINKX_Controller {
 		$launch_num = count($launch);
 		if ($launch_num > 0) {
 			for ($i = 0; $i < count($launch); $i++) {
-				$today_budget += $launch[$i].budget;
+				$today_budget += $launch[$i]['budget'];
 				if ($launch[$i]['status'] == 1) {
 					$start_launch_num += 1;
 				}
