@@ -19,6 +19,7 @@ class Home extends ADLINKX_Controller {
 	}
 
 	public function index() {
+		$type = $this->uri->segment(3) ? $this->uri->segment(3) : '';
 		$data = array();
 		$user = $this->user->get(array('uid' => $this->session->userdata('uid'), 'channel_id' => 228, 'isdel' => '0'));
 		$store = $this->store->get_all(array('own_id' => $this->session->userdata('uid'), 'is_del' => '0'));
@@ -26,6 +27,12 @@ class Home extends ADLINKX_Controller {
 			$launch = $this->launch->get_all(array('uid' => $this->session->userdata('uid'), 'shop_id' => $store[0]['shop_id'], 'is_del' => '0'));
 		} else {
 			$launch = $this->launch->get_all(array('uid' => $this->session->userdata('uid'), 'is_del' => '0'));
+		}
+
+		if($type == 'debug'){
+			var_dump($user);
+			var_dump($store);
+			var_dump($launch);
 		}
 
 		// var_dump($launch);
