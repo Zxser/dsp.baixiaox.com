@@ -29,15 +29,9 @@ class Home extends ADLINKX_Controller {
 			$launch = $this->launch->get_all(array('uid' => $this->session->userdata('uid'), 'is_del' => '0'));
 		}
 
-		if($type == 'debug'){
-			var_dump($user);
-			var_dump($store);
-			var_dump($launch);
-		}
-
 		// var_dump($launch);
 		$today_budget = 0;				// 今日预算
-		$start_launch_num = 0;			// 投放中的计划
+		$start_launch_num = 0;			// 投放中的计划的个数
 		$launch_num = count($launch);
 		if ($launch_num > 0) {
 			for ($i = 0; $i < count($launch); $i++) {
@@ -50,10 +44,6 @@ class Home extends ADLINKX_Controller {
 			$start_launch_num = 0;
 		}
 
-		// var_dump($user);
-
-		// var_dump($launch);
-		// var_dump($store);
 		$smarty_cache_id = 'home_index';
 		$this->assign('user', $user);
 		$this->assign('store', $store);
