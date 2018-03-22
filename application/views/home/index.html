@@ -53,11 +53,11 @@
          <span><{$user.charge_yesterday|string_format:"%.2f"}></span>
          <!-- <span><{$user.charge_today|string_format:"%.2f"}></span> -->
         </div>
-        <div class="yestady-consume-box">
-         <p>昨日消耗</p>
+        <!-- <div class="today-consume-box"> -->
+         <!-- <p>昨日消耗</p> -->
          <!-- <span><{$user.charge_yesterday|string_format:"%.2f"}></span> -->
-         <span><{$user.charge_today|string_format:"%.2f"}></span>
-        </div>
+         <!-- <span><{$user.charge_today|string_format:"%.2f"}></span> -->
+        <!-- </div> -->
         <div class="tady-budget-box">
          <p>今日预算</p>
          <span><{if $launch|@count neq 0}><{$today_budget|string_format:"%.2f"}><{else}>0.00<{/if}></span>
