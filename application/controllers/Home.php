@@ -30,16 +30,17 @@ class Home extends ADLINKX_Controller {
 		}
 
 		if($type == 'debug'){
-			var_dump($user);
-			var_dump($store);
+
 			var_dump($launch);
 		}
 
 		// var_dump($launch);
-		$start_launch_num = 0;
+		$today_budget = 0;				// 今日预算
+		$start_launch_num = 0;			// 投放中的计划
 		$launch_num = count($launch);
 		if ($launch_num > 0) {
 			for ($i = 0; $i < count($launch); $i++) {
+				$today_budget += $launch[$i].budget;
 				if ($launch[$i]['status'] == 1) {
 					$start_launch_num += 1;
 				}
@@ -58,6 +59,7 @@ class Home extends ADLINKX_Controller {
 		$this->assign('launch', $launch);
 		$this->assign('start_launch_num', $start_launch_num);
 		$this->assign('launch_num', $launch_num);
+		$this->assign('today_budget',$today_budget);
 		$this->display('home/index.html', $smarty_cache_id);
 	}
 }
