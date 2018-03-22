@@ -30,7 +30,8 @@ class Home extends ADLINKX_Controller {
 		}
 
 		if($type == 'debug'){
-
+			var_dump($launch);
+			var_dump($launch);
 			var_dump($launch);
 		}
 
