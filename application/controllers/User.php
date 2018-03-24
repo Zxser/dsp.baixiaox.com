@@ -30,8 +30,8 @@ class User extends ADLINKX_Controller {
 	public function sign_in() {
 		$result = array();
 		$input_data = $this->input->post();
-		$remember = $input_data['isChecked'];
-		$jump = $input_data['jump'];
+		$remember = $input_data['isChecked'] ? $input_data['isChecked'] : null;
+		$jump = $input_data['jump'] ? $input_data['jump'] : null;
 		if(isset($input_data['isChecked'])){
 			unset($input_data['isChecked']);
 		}
