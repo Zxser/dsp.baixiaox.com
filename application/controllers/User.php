@@ -31,7 +31,7 @@ class User extends ADLINKX_Controller {
 		$result = array();
 		$input_data = $this->input->post();
 		$remember = $input_data['isChecked'] ? $input_data['isChecked'] : null;
-		$jump = $input_data['jump'] ? $input_data['jump'] : null;
+		$jump = isset($input_data['jump']) ? $input_data['jump'] : null;
 		if(isset($input_data['isChecked'])){
 			unset($input_data['isChecked']);
 		}
