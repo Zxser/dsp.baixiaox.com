@@ -32,8 +32,12 @@ class User extends ADLINKX_Controller {
 		$input_data = $this->input->post();
 		$remember = $input_data['isChecked'];
 		$jump = $input_data['jump'];
-		unset($input_data['isChecked']);
-		unset($input_data['jump']);
+		if(isset($input_data['isChecked'])){
+			unset($input_data['isChecked']);
+		}
+		if(isset($input_data['jump'])){
+			unset($input_data['jump']);
+		}
 		$check_status = $this->check_password($input_data);
 		if ($check_status && isset($check_status) && !empty($check_status)) {
 			unset($check_status['password']);
