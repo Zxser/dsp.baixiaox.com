@@ -294,6 +294,7 @@
                         var current = res.data.current;
                         if(list.length > 0){
                             for(var i=0;i<list.length;i++){
+                                alert(list[i].device);
                                 html += '<tr>'+
                                     '<td><a href="javascript:void(0);" class="select-buts" data-is-checked="false" data-plan-id="'+list[i].plan_id+'"><i class="fa fa-square-o"></i>&nbsp;'+(i+1)+'</a></td>'+
                                     '<td><a href="/strategyMange/lists/campaign/strategy/0/'+list[i].plan_id+'" class="">'+list[i].plan_name+'</a></td>'+
@@ -328,6 +329,7 @@
         }
 
         function get_device_type(device){
+            console.log(device);
             switch(device){
                 case 1:
                     return 'PC端';
