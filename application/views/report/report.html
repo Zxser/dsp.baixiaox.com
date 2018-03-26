@@ -145,10 +145,11 @@
             range: '~',
             value:date_value,
             done:function(data){
+                var shop_id = $(this).attr('data-shop-id');
                 var start_date = data.split(' ~ ')[0];
                 var end_date = data.split(' ~ ')[1];
                 get_dsp_satef('day',{
-                    'shop_id':$(this).attr('data-shop-id'),
+                    'shop_id':shop_id,
                     'start_date':start_date,
                     'end_start':end_date,
                     'metric':'pv_click',
