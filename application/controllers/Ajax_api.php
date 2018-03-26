@@ -242,7 +242,8 @@ class Ajax_api extends ADLINKX_Controller {
 		$field = array();
 		$tmp = array();
 		$data = array();
-		$key = array();
+		$key = explode('-',$metric);
+		var_dump($key);
 		// for($i=0;$i<count($keys);$i++){
 		// 		$tmp['name'] = $legend[$i];
 		// 		$tmp['type'] = 'line';
@@ -251,26 +252,43 @@ class Ajax_api extends ADLINKX_Controller {
 		// 		array_push($data,$tmp);
 		// 	}
 
-		if ($metric == 'pv_crt' || $metric == 'crt_pv') {
-			$legend = array('展现量', '点击率');
-			$key = array('ds_pv', 'ds_crt');
-		} elseif ($metric == 'pv_charge' || $metric == 'charge_pv') {
-			$legend = array('展现量', '总消耗');
-			$key = array('ds_pv', 'ds_charge');
-		} elseif ($metric == 'click_crt' || $metric == 'crt_click') {
-			$legend = array('点击', '点击率');
-			$key = array('ds_click', 'ds_crt');
-		} elseif ($metric == 'click_charge' || $metric == 'charge_click') {
-			$legend = array('点击', '总消耗');
-			$key = array('ds_click', 'ds_charge');
-		} elseif ($metric == 'crt_charge' || $metric == 'charge_crt') {
-			$legend = array('点击率', '总消耗');
-			$$key = array('ds_crt', 'ds_charge');
-		} else {
-//pv_click
-			$legend = array('展现量', '点击');
-			$key = array('ds_pv', 'ds_click');
+		if ($metric == 'ds_pv-ds_charge') {
+		    $legend = array('展现量','总消耗');
+		} elseif ($metric == 'ds_pv-ds_click') {
+		    $legend = array('展现量', '点击数');
+		} elseif ($metric == 'ds_pv-ds_ctr') {
+		    $legend = array('展现量', '点击率');
+		} elseif ($metric == 'ds_click-ds_ctr') {
+		    $legend = array('点击数', '点击率');
+		} elseif ($metric == 'ds_click-ds_charge') {
+		    $legend = array('点击数', '总消耗');
+		} elseif($metric== 'ds_ctr-ds_charge'){
+		    $legend = array('点击率', '总消耗');
+		}else {
+		//pv_click
+		    $legend = array('展现量', '点击数');
 		}
+
+// 		if ($metric == 'pv_crt' || $metric == 'crt_pv') {
+// 			$legend = array('展现量', '点击率');
+// 			$key = array('ds_pv', 'ds_crt');
+// 		} elseif ($metric == 'pv_charge' || $metric == 'charge_pv') {
+// 			$legend = array('展现量', '总消耗');
+// 			$key = array('ds_pv', 'ds_charge');
+// 		} elseif ($metric == 'click_crt' || $metric == 'crt_click') {
+// 			$legend = array('点击', '点击率');
+// 			$key = array('ds_click', 'ds_crt');
+// 		} elseif ($metric == 'click_charge' || $metric == 'charge_click') {
+// 			$legend = array('点击', '总消耗');
+// 			$key = array('ds_click', 'ds_charge');
+// 		} elseif ($metric == 'crt_charge' || $metric == 'charge_crt') {
+// 			$legend = array('点击率', '总消耗');
+// 			$$key = array('ds_crt', 'ds_charge');
+// 		} else {
+// //pv_click
+// 			$legend = array('展现量', '点击');
+// 			$key = array('ds_pv', 'ds_click');
+// 		}
 		// var_dump($result);
 		$tmp = array();
 		$cache = array();
