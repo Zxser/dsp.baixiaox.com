@@ -247,7 +247,7 @@
             $('.target-value-option').each(function(index, el) {
                 if($(this).attr('data-checked') == 'true'){
                     text += $(this).find('span').html()+'、';
-                    attr += $(this).attr('data-option-value')+'#';
+                    attr += $(this).attr('data-option-value')+'-';
                 }
             });
             $('.target-values').html(text.substr(0,parseInt(text.length-1))).attr('data-target-values',attr.substr(0,parseInt(attr.length-1)));
