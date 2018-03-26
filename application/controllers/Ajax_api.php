@@ -310,7 +310,7 @@ class Ajax_api extends ADLINKX_Controller {
 		$tmp = array();
 		if ($list && count($list) > 0) {
 			for ($i = 0; $i < count($list); $i++) {
-				$key == 'ds_charge' ? array_push($tmp, sprintf("%.2f",$list[$i][$key]/1000)): array_push($tmp, $list[$i][$key]);
+				$key == 'ds_charge' ? array_push($tmp, sprintf("%.2f",$list[$i][$key]/100)): array_push($tmp, $list[$i][$key]);
 			}
 		} else {
 			$tmp = array('0', '0', '0');
