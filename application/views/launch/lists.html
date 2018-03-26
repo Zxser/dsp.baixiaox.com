@@ -294,7 +294,6 @@
                         var current = res.data.current;
                         if(list.length > 0){
                             for(var i=0;i<list.length;i++){
-                                alert(list[i].device);
                                 html += '<tr>'+
                                     '<td><a href="javascript:void(0);" class="select-buts" data-is-checked="false" data-plan-id="'+list[i].plan_id+'"><i class="fa fa-square-o"></i>&nbsp;'+(i+1)+'</a></td>'+
                                     '<td><a href="/strategyMange/lists/campaign/strategy/0/'+list[i].plan_id+'" class="">'+list[i].plan_name+'</a></td>'+
@@ -302,7 +301,7 @@
                                     '<td>'+list[i].startdate+'~'+list[i].enddate+'</td>'+
                                     '<td>'+list[i].budget+'</td>'+
                                     '<td>'+get_device_type(list[i].device)+'</td>'+
-                                    '<td>'+(list[i].pv ? list[i].pv : '')+'</td>'+
+                                    '<td>'+(list[i].pv ? list[i].pv : 0)+'</td>'+
                                     '<td>'+(list[i].click ? list[i].click : 0)+'</td>'+
                                     '<td>'+(list[i].ctr ? list[i].ctr:0.00 )+'%</td>'+
                                     '<td>'+(list[i].click_cost ? list[i].click_cost: 0.00)+'</td>'+
