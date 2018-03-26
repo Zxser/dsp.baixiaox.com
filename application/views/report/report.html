@@ -237,6 +237,7 @@
             e.stopPropagation();
             var text = '',
             attr = '';
+            check_selected_box($(this));
             if($(this).attr('data-checked') == 'false'){
                 $(this).find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
                 $(this).attr('data-checked',true);
@@ -253,13 +254,18 @@
             $('.target-values').html(text.substr(0,parseInt(text.length-1))).attr('data-target-values',attr.substr(0,parseInt(attr.length-1)));
         });
 
-        function check_selected_box(){
-            var attr = '';
+        function check_selected_box(e){
+            var selected = 0;
             $('.target-value-option').each(function(index,el){
                 if($(this).attr('data-checked') == 'true'){
-                    $(this).next().removeClass('fa-check-square-o').addClass('fa-square-o').attr('data-checked',false);
+                    selected++;
+                    // $(this).next().removeClass('fa-check-square-o').addClass('fa-square-o').attr('data-checked',false);
                 }
             });
+
+            if(selected == 2){
+                e.next().removeClass('fa-check-square-o').addClass('fa-square-o').attr('data-checked',false);
+            }
         }
 
         var but_type = 'day';
