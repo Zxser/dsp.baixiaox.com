@@ -145,9 +145,16 @@
             range: '~',
             value:date_value,
             done:function(data){
+                var but_type = 'day';
                 var shop_id = $('#store-title-box').attr('data-shop-id');
                 var start_date = data.split(' ~ ')[0];
                 var end_date = data.split(' ~ ')[1];
+                $('.report-query-buttons').each(function(i,e){
+                    if($(this).attr('data-checked') == 'true'){
+                        but_type = $(this).attr('data-type');
+                    }
+                });
+                $('.report-query-buttons').attr('data-type')
                 get_dsp_satef('day',{
                     'shop_id':shop_id,
                     'start_date':start_date,
@@ -155,6 +162,8 @@
                     'metric':$('.target-values').attr('data-target-values'),
                     'format':'chart'
                 });
+
+                get_table_data(but_type,shop_id,start_date,end_date,0,1);
             }
         });
 
