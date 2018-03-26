@@ -231,7 +231,7 @@ class Ajax_api extends ADLINKX_Controller {
 		$start_date = $this->uri->segment(5) ? $this->uri->segment(5) : date('Y-m-d', time());
 		$end_date = $this->uri->segment(6) ? $this->uri->segment(6) : date('Y-m-d', time());
 		$format = $this->uri->segment(7) ? $this->uri->segment(7) : 'chart';
-		$metric = $this->uri->segment(8) ? $this->uri->segment(8) : 'ds_pv#ds_click';
+		$metric = $this->uri->segment(8) ? $this->uri->segment(8) : 'ds_pv-ds_click';
 		$offset = $this->uri->segment(9) ? $this->uri->segment(9) : 1;
 		$num = $this->uri->segment(10) ? $this->uri->segment(10) : 20;
 		$key = $this->uri->segment(11) ? $this->uri->segment(11) : 'id';
