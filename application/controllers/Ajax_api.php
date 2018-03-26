@@ -243,7 +243,6 @@ class Ajax_api extends ADLINKX_Controller {
 		$tmp = array();
 		$data = array();
 		$key = explode('-',$metric);
-		var_dump($key);
 		// for($i=0;$i<count($keys);$i++){
 		// 		$tmp['name'] = $legend[$i];
 		// 		$tmp['type'] = 'line';
