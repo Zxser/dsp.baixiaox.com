@@ -250,7 +250,7 @@
                     attr += $(this).attr('data-option-value')+'#';
                 }
             });
-            $('.target-values').html(text.substr(0,parseInt(text.length-1))).attr('data-target-values',attr);
+            $('.target-values').html(text.substr(0,parseInt(text.length-1))).attr('data-target-values',attr.substr(0,parseInt(attr.length-1)));
         });
 
         var but_type = 'day';
