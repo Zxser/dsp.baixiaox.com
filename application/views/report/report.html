@@ -178,7 +178,7 @@
                 $('.brands-lists-block').css('display','none');
                 $(this).find('.select-brands-but i').removeClass('fa-caret-down').addClass('fa-caret-right');
             }
-            
+
         });
 
         $(document).on('mouseover','.brands-lists',function(e){
@@ -215,7 +215,7 @@
                 }else{
                     $(this).parent().parent().css('height',556);
                 }
-                    
+
             }
         });
 
@@ -277,6 +277,7 @@
         });
 
         function get_dsp_satef(type,json){
+            console.log(json);
             $.ajax({
                 url:'/ajax_api/dsp_satef/'+type+'/'+json.shop_id+'/'+json.start_date+'/'+json.end_start+'/'+json.format+'/'+json.metric,
                 type:'GET',
@@ -371,11 +372,11 @@
                         }
                     break;
                 }
-                
+
             }else{
                 tmp += '<tr><td colspan="'+td_num+'" rowspan="" headers="" style="text-align: center;">暂无数据</td></tr>';
             }
-            
+
             return tmp;
         }
 

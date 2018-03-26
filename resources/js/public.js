@@ -194,7 +194,7 @@ Adlinkx.prototype.setTimeOut = function(fn, s) {
  * @param  {[type]} title [description]
  * @param  {[type]} json  [description]
  * @return {[type]}       [description]
- * @uses  
+ * @uses
  *  Adlinkx.confirm('您确定要删除创意吗？', {
         'confirm': {
             'title': '确定',
@@ -309,7 +309,7 @@ Adlinkx.prototype.ucfirst = function(str) {
 Adlinkx.prototype.addEvent = function(els, ev, fn) {
     els.attachEvent ? (els.attachEvent('on' + ev, function() {
         fn.call(els);
-        window.event.cancelBubble = true; //IE,阻止冒泡 
+        window.event.cancelBubble = true; //IE,阻止冒泡
         window.event.returnValue = false //IE,取消默认事件
         return false;
     })) : (els.addEventListener(ev, function(e) {
@@ -515,7 +515,7 @@ Adlinkx.prototype.popup_layer = function(title, text, json) {
 Adlinkx.prototype.autoResizeImage = function(width, height, img) {
     var imgOBJ = new Image();
     imgOBJ.scr = img;
-    var Ratio = 1; // 比例，默认1：1 
+    var Ratio = 1; // 比例，默认1：1
     var ratio_w;
     var ratio_w;
     var w = imgOBJ.width;
@@ -524,7 +524,7 @@ Adlinkx.prototype.autoResizeImage = function(width, height, img) {
     ratio_h = height / h;
     if (width == 0 && height == 0) {
         Ratio = 1;
-    } else if (width == 0) { //  
+    } else if (width == 0) { //
         if (ratio_h < 1) Ratio = ratio_h;
     } else if (height == 0) {
         if (ratio_w < 1) Ratio = ratio_w;
@@ -568,26 +568,26 @@ Adlinkx.prototype.getStyleValue = function(e, key) {
  */
 Adlinkx.prototype.number_format = function(num, cent, isThousand, count) {
     num = num.toString().replace(/\$|\,/g, '');
-    if (isNaN(num)) //检查传入数值为数值类型.  
+    if (isNaN(num)) //检查传入数值为数值类型.
         num = "0";
-    if (isNaN(cent)) //确保传入小数位为数值型数值.  
+    if (isNaN(cent)) //确保传入小数位为数值型数值.
         cent = 0;
     cent = parseInt(cent);
-    cent = Math.abs(cent); //求出小数位数,确保为正整数.  
-    if (isNaN(isThousand)) //确保传入是否需要千分位为数值类型.  
+    cent = Math.abs(cent); //求出小数位数,确保为正整数.
+    if (isNaN(isThousand)) //确保传入是否需要千分位为数值类型.
         isThousand = 0;
     isThousand = parseInt(isThousand);
     if (isThousand < 0)
         isThousand = 0;
-    if (isThousand >= 1) //确保传入的数值只为0或1  
+    if (isThousand >= 1) //确保传入的数值只为0或1
         isThousand = 1;
-    sign = (num == (num = Math.abs(num))); //获取符号(正/负数)  
-    //Math.floor:返回小于等于其数值参数的最大整数  
-    num = Math.floor(num * Math.pow(10, cent) + 0.50000000001); //把指定的小数位先转换成整数.多余的小数位四舍五入.  
-    cents = num % Math.pow(10, cent); //求出小数位数值.  
-    num = Math.floor(num / Math.pow(10, cent)).toString(); //求出整数位数值.  
-    cents = cents.toString(); //把小数位转换成字符串,以便求小数位长度.  
-    while (cents.length < cent) { //补足小数位到指定的位数.  
+    sign = (num == (num = Math.abs(num))); //获取符号(正/负数)
+    //Math.floor:返回小于等于其数值参数的最大整数
+    num = Math.floor(num * Math.pow(10, cent) + 0.50000000001); //把指定的小数位先转换成整数.多余的小数位四舍五入.
+    cents = num % Math.pow(10, cent); //求出小数位数值.
+    num = Math.floor(num / Math.pow(10, cent)).toString(); //求出整数位数值.
+    cents = cents.toString(); //把小数位转换成字符串,以便求小数位长度.
+    while (cents.length < cent) { //补足小数位到指定的位数.
         cents = "0" + cents;
     }
     if (isThousand == 0) {
@@ -602,7 +602,7 @@ Adlinkx.prototype.number_format = function(num, cent, isThousand, count) {
             }
             num = c + num;
         }
-        //对整数部分进行千分位格式化.  
+        //对整数部分进行千分位格式化.
         for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
             num = num.substring(0, num.length - (4 * i + 3)) + ',' +
             num.substring(num.length - (4 * i + 3));

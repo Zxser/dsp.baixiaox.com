@@ -33,7 +33,7 @@
                                 <{else}>
                                     <div class="brands-lists" data-shop-id="">全部</div>
                                 <{/if}>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                                         </span>
                                     </div>
                                     <table class="table table-striped" id="table2">
-                                        <thead>                      
+                                        <thead>
                                             <tr>
                                                 <th>序号</th>
                                                 <th>推广计划</th>
@@ -97,7 +97,7 @@
                                             <{else}>
                                                 <tr><td colspan="12" rowspan="" headers="" style="text-align: center;">暂无数据</td></tr>
                                             <{/if}>
-                                            
+
                                         </tbody>
                                     </table>
                                     <div id="pages-box" data-count="<{$count}>" data-current="<{$current}>"></div>
@@ -174,7 +174,7 @@
                 $(this).find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
                 $('.brands-lists-block').css('display','none');
             }
-            
+
         });
         $(document).on('click','.brands-lists',function(e){
             $('#store-title-box').html($(this).html()).attr('data-shop-id',$(this).attr('data-shop-id'));
@@ -212,7 +212,7 @@
             }else{
                 ADLINKX.alert('请选择要删除的投放');
             }
-            
+
         });
 
         $(document).on('click','.delete-buts',function(){
@@ -250,14 +250,14 @@
                     }
                 });
                 //console.log(check_store_money(shop_id));
-                
+
             }else{
                 ADLINKX.alert('请选择要开启的投放');
             }
         });
 
         $(document).on('click','.stop-buts',function(){
-            
+
             var ids = [];
             $('.select-buts').each(function(index, el) {
                 if($(this).attr('data-is-checked') == 'true'){
@@ -389,25 +389,37 @@
 
         function delete_plan(ids){
             console.log(ids);
-            $.ajax({
-                url:'/launchMange/delete',
-                type:'POST',
-                data:{'ids':ids},
-                success:function(res){
-                    if(res.code ==1 && res.msg == 'success'){
-                        ADLINKX.alert('删除成功',2,function(){
-                            window.location.reload();
-                        });
-                    }else{
-                        ADLINKX.alert('删除失败',2,function(){
-                            window.location.reload();
+            ADLINKX.confirm('您确定要删除计划吗？删除后此计划的数据将无法恢复！！',{
+                'confirm': {
+                    'title': '确定',
+                    'callback': function() {
+                        $.ajax({
+                            url:'/launchMange/delete',
+                            type:'POST',
+                            data:{'ids':ids},
+                            success:function(res){
+                                if(res.code ==1 && res.msg == 'success'){
+                                    ADLINKX.alert('删除成功',2,function(){
+                                        window.location.reload();
+                                    });
+                                }else{
+                                    ADLINKX.alert('删除失败',2,function(){
+                                        window.location.reload();
+                                    });
+                                }
+                            },
+                            error:function(err){
+                                console.error(err);
+                            }
                         });
                     }
                 },
-                error:function(err){
-                    console.error(err);
+                'cancel': {
+                    'title': '取消',
+                    'callback': function() { alert('取消'); }
                 }
             });
+
         }
 
         function update_launch(ids,action){
