@@ -329,23 +329,16 @@
         }
 
         function get_device_type(device){
-            console.log(device);
-            switch(device){
-                case 1:
-                    return 'PC端';
-                break;
-                case 2:
-                    return '无线端';
-                break;
-                case 3:
-                    return 'APP';
-                break;
-                case 4:
-                    return 'Native';
-                break;
-                default:
-                    return '不限设备';
-                break;
+            if(device == 1){
+                return 'PC端';
+            }else if(device == 2){
+                return '无线端';
+            }else if(device == 3){
+                return 'APP';
+            }else if(device == 4){
+                return 'Native';
+            }else{
+                return '不限设备';
             }
         }
 
