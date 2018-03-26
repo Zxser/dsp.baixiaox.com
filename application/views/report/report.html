@@ -238,17 +238,15 @@
             var text = '',
             attr = '',
             selected = 0;
-            $('.target-value-option').each(function(i,e){
-                if($(this).attr('data-checked') == 'true'){
-                    selected++;
-                }
-            });
-
-            alert(selected);
-
-            if(selected == 2){
-                $(this).next().removeClass('fa-check-square-o').addClass('fa-square-o');
-            }else{
+            // $('.target-value-option').each(function(i,e){
+            //     if($(this).attr('data-checked') == 'true'){
+            //         selected++;
+            //     }
+            // });
+            //
+            // if(selected == 2){
+            //     $(this).next().find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+            // }else{
                 if($(this).attr('data-checked') == 'false'){
                     $(this).find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
                     $(this).attr('data-checked',true);
@@ -263,7 +261,7 @@
                     }
                 });
                 $('.target-values').html(text.substr(0,parseInt(text.length-1))).attr('data-target-values',attr.substr(0,parseInt(attr.length-1)));
-            }
+            // }
         });
 
         var but_type = 'day';
