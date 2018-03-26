@@ -251,10 +251,6 @@ class Ajax_api extends ADLINKX_Controller {
 		// 		array_push($data,$tmp);
 		// 	}
 
-
-
-		var_dump($result);
-
 		if ($metric == 'pv_crt' || $metric == 'crt_pv') {
 			$legend = array('展现量', '点击率');
 			$key = array('ds_pv', 'ds_crt');
