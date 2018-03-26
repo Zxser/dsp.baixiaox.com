@@ -253,6 +253,15 @@
             $('.target-values').html(text.substr(0,parseInt(text.length-1))).attr('data-target-values',attr.substr(0,parseInt(attr.length-1)));
         });
 
+        function check_selected_box(){
+            var attr = '';
+            $('.target-value-option').each(function(index,el){
+                if($(this).attr('data-checked') == 'true'){
+                    $(this).next().removeClass('fa-check-square-o').addClass('fa-square-o').attr('data-checked',false);
+                }
+            });
+        }
+
         var but_type = 'day';
         $(document).on('click','.report-query-buttons',function(){
             var but_type = $(this).attr('data-type');
