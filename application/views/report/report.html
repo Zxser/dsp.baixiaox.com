@@ -245,7 +245,7 @@
         $(document).on('click','.target-value-option',function(e){
             e.stopPropagation();
             var text = '',
-            attr = '',
+            attr = '';
             if($(this).attr('data-checked') == 'false'){
                 $(this).find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
                 $(this).attr('data-checked',true);
